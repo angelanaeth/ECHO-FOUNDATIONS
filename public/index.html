@@ -126,6 +126,58 @@
     }
     .canonical-callout strong { color: var(--ink); }
 
+    .callout {
+      background: rgba(214,84,22,0.05);
+      border-left: 3px solid var(--accent);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+      font-size: 15px;
+    }
+    .callout-title {
+      font-weight: 700;
+      color: var(--ink);
+      font-size: 14.5px;
+      margin-bottom: 6px;
+      letter-spacing: -0.005em;
+    }
+    .callout p { margin: 6px 0; }
+    .callout.coach-note {
+      background: rgba(10,22,40,0.04);
+      border-left-color: var(--header-bg);
+    }
+    .callout.warning {
+      background: rgba(214,84,22,0.08);
+      border-left-color: var(--accent);
+    }
+    .callout.echo-supreme {
+      background: rgba(176,138,60,0.10);
+      border-left-color: var(--accent-2);
+      font-size: 14px;
+    }
+
+    /* Tables used for level/anchor/stress matrices */
+    section.card table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 14.5px;
+    }
+    section.card th, section.card td {
+      text-align: left;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    section.card th {
+      background: rgba(214,84,22,0.06);
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 13.5px;
+      letter-spacing: -0.005em;
+    }
+    section.card tr:last-child td { border-bottom: none; }
+
     footer {
       max-width: var(--maxw);
       margin: 48px auto 24px;
@@ -488,6 +540,686 @@
       <p>Recovery weeks are scheduled deliberately into the training year — typically every 3-4 weeks of harder work — because adaptation happens during recovery, not during the hard work itself. Athletes who skip recovery weeks don't get fitter faster; they accumulate fatigue until something breaks. The Recovery block is the one that makes every other block productive.</p>
 
       <p class="meta">ECHO covers block <em>selection</em> — which block to pick for which athlete at which moment — using the full decision framework. Foundations gives you the vocabulary so you understand what your coach is choosing and why.</p>
+
+      <h3>Repeatable, Recoverable, Progressive — the three filters on every plan</h3>
+
+      <p>Before any block goes on an athlete's calendar, it gets run through three filters. These three words are the cleanest way to describe whether a training plan is going to <em>work</em> for a specific human being, or whether it's going to break them in week 3 and they're going to disappear.</p>
+
+      <ol>
+        <li><strong>Repeatable</strong> — can this week happen again next week, and the week after, given the athlete's actual life? If the answer is "only if every single thing goes perfectly," it's not repeatable. If the answer is "yes, even when work spikes or the kid gets sick," it is. Repeatable = realistic, not heroic.</li>
+        <li><strong>Recoverable</strong> — can the athlete absorb this week given their <em>total</em> stress load (training + work + family + sleep)? Adaptation happens during recovery, not during the work. If the week leaves them cooked — deep fatigue, can't sleep, ATL spike with no rebound — it's not recoverable. Drop it.</li>
+        <li><strong>Progressive</strong> — over the next 3-6 weeks, is the trajectory <em>moving forward</em>? Not every week, but in aggregate. Progression is slow — 5-10% per week, not 50% jumps. If the athlete is doing the same 10 hours for 12 weeks, that's stagnation. If they're spiking from 10 to 16 in one week, that's injury risk dressed up as ambition.</li>
+      </ol>
+
+      <p>The most common coaching failure is writing a plan that satisfies <em>one</em> of these (usually "progressive") at the cost of the other two. The athlete shows up week one inspired, week three exhausted, week five gone. ECHO blocks are designed to satisfy all three, every time, for the human in front of you — not the idealized version of them.</p>
+    </section>
+
+    <!-- ============================================================
+         NEW MODULE: THE WEEKLY SYSTEM — how to actually use the blocks
+         Sourced from "Training for a Full Life" PDF; cross-validated
+         against ECHO canonical (zones, block names, testing protocols).
+         Anything that contradicted ECHO was dropped, not adapted.
+         ============================================================ -->
+
+    <section class="card" id="sec-training-levels">
+      <h2>Training Levels &amp; the Four Anchors <span class="pill">Weekly system</span></h2>
+
+      <p>You have the zones. You have the block types. Now: <strong>how do you actually structure a week?</strong> Most age-group athletes — and a lot of newer coaches — get this part wrong. They follow a plan written for someone with a different life, they protect the wrong sessions when the week falls apart, and they end up doing 80% of the work for 40% of the adaptation.</p>
+
+      <p>This section gives you two coaching tools that go together: <strong>training levels</strong> (how much volume the athlete can absorb <em>this specific week</em>) and the <strong>four anchors</strong> (which four sessions get protected before anything else).</p>
+
+      <div class="callout echo-supreme">
+        <div class="callout-title">ECHO compliance check</div>
+        <p>All intensity references in this section use ECHO's zone vocabulary (ZR / Z1 / Z2 / Z3 / VO2 Max) anchored to CP, CS, swim CS, and LTHR. The level framework and anchor framework are <em>scheduling tools</em> — they answer "how many hours and which sessions," not "what zone." Zone selection always flows from the active block (Base, Build, Peak, Taper, or Recovery) per the ECHO Manual.</p>
+      </div>
+
+      <h3>The three training levels — pick one <em>per week</em></h3>
+
+      <p>An athlete's training capacity is not fixed. It moves with life. A great coach doesn't write one plan and bludgeon the athlete with it for 12 weeks — they write a system that flexes to <em>this week's</em> reality. Three levels:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Level</th>
+            <th>Volume / wk</th>
+            <th>When to use</th>
+            <th>What's in the week</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Level 1<br>Survival</strong></td>
+            <td>6-8 h</td>
+            <td>Life stress is high. Work deadline, family crisis, illness recovery, heavy travel, poor sleep stack.</td>
+            <td>Anchors only — short long ride, short long run, one easy swim, optional easy spin. <strong>Zero intensity.</strong> All ZR-Z1. The goal is <em>maintain base</em>, not build.</td>
+          </tr>
+          <tr>
+            <td><strong>Level 2<br>Solid work</strong></td>
+            <td>9-11 h</td>
+            <td>Normal life, normal stress, recovery is working. <strong>This is the default.</strong> If you don't know which level, pick this one.</td>
+            <td>All four anchors + 2-3 easy fill sessions. Distribution: 85-90% in ZR-Z1-Z2 (easy and steady), 10-15% in Z3 (one threshold session). Sustainable for months.</td>
+          </tr>
+          <tr>
+            <td><strong>Level 3<br>Full training</strong></td>
+            <td>12-15 h</td>
+            <td>Life stress is low, sleep is dialed, recovery markers are green. Peak weeks of the Build or Peak block when everything aligns.</td>
+            <td>All anchors + optional doubles (short easy bike + short easy swim same day) + possibly a second quality session. Distribution: 80% easy, 20% hard. Only sustainable in windows — not as a default.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>The choice between levels is a <em>weekly</em> decision, not a phase decision. An athlete might be Level 2 for six weeks, drop to Level 1 for a week when work explodes, go back to Level 2 for two weeks, then hit Level 3 for the three peak weeks of their Build block. That's normal. That's the system working as designed.</p>
+
+      <div class="callout coach-note">
+        <div class="callout-title">How a coach actually uses the levels</div>
+        <p>Sunday night (or Monday morning), the coach and athlete answer three questions: <strong>(1)</strong> How was last week's recovery — sleep, soreness, mood? <strong>(2)</strong> What does the calendar look like this week — work crunch, travel, family demands? <strong>(3)</strong> Where is the athlete in their block — base-building, threshold push, taper?</p>
+        <p>High stress + poor recovery → <strong>Level 1</strong>, accept it, no guilt. Normal stress + good recovery → <strong>Level 2</strong>, default. Low stress + great recovery + peak block window → <strong>Level 3</strong>. The level changes; the anchors do not.</p>
+      </div>
+
+      <h3>The four anchors — what gets protected first</h3>
+
+      <p>Every training week — regardless of level — has the same four anchor sessions. When life gets tight and the week shrinks from Level 3 down to Level 1, you don't randomly cut workouts. You cut filler and you <strong>keep the anchors</strong>. These four are how the athlete keeps moving forward even on the worst weeks.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Anchor</th>
+            <th>Purpose</th>
+            <th>Typical zone</th>
+            <th>Duration window</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Long ride</strong><br>(usually Saturday)</td>
+            <td>Aerobic engine, bike pacing, fueling rehearsal. The biggest single time investment of the week and the largest single fitness driver for long-course racing.</td>
+            <td>Z1 (mostly) with Z2 touches in Build/Peak. Race-pace efforts in Peak.</td>
+            <td>2.5-3.5 h (half-iron focus) · 3.5-4.5 h (full-iron focus) · 1.5-2.5 h (other endurance)</td>
+          </tr>
+          <tr>
+            <td><strong>2. Long run</strong><br>(usually Sunday, ~24h after the long ride for the brick effect)</td>
+            <td>Run durability, mental toughness, running on tired legs. Where races are won or lost.</td>
+            <td>Z1 (mostly), Z2 in Build/Peak, race-pace touches in Peak.</td>
+            <td>75-90 min (half-iron) · 90-120 min (full-iron) · runners scale to event</td>
+          </tr>
+          <tr>
+            <td><strong>3. Quality session</strong><br>(usually Tuesday or Thursday)</td>
+            <td>Block-specific stimulus. In Build, this is Z3 threshold work. In Peak, this is VO2 Max or race-pace. In Base, it may not exist yet.</td>
+            <td>Z3 in Build · VO2 Max in Peak · skip in Base/Recovery</td>
+            <td>45-60 min total session (including warm-up / cool-down)</td>
+          </tr>
+          <tr>
+            <td><strong>4. Easy frequency</strong><br>(2-3 short sessions, anywhere they fit)</td>
+            <td>Volume and recovery without fatigue cost. Most fitness is built here. Spread across the week.</td>
+            <td>ZR-Z1 only. Conversational. If the athlete can't talk in full sentences, they're not in the right zone.</td>
+            <td>30-60 min each, 2-3× per week</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout warning">
+        <div class="callout-title">When life gets crazy: cut everything, keep these four</div>
+        <p>A normal Level 2 week is the four anchors + filler. A Level 1 week is just the four anchors — possibly shortened. <strong>Never cut an anchor before cutting filler.</strong> An athlete who skips Tuesday's threshold session but does Saturday's long ride keeps moving forward. An athlete who does Tuesday's threshold and skips Saturday's long ride does not.</p>
+      </div>
+
+      <h3>The session-prioritization decision tree</h3>
+
+      <p>When a coach has to triage a broken week, the order of protection is fixed:</p>
+
+      <ol>
+        <li><strong>Long ride</strong> goes first on the calendar. Lose this and you lose the largest single fitness stimulus of the week.</li>
+        <li><strong>Long run</strong> goes second — and ideally 24 hours after the long ride for the brick effect. Lose this and run durability lags.</li>
+        <li><strong>Quality session</strong> goes third. This is the block-specific stimulus. In a Recovery week, it disappears entirely — that's correct.</li>
+        <li><strong>Easy frequency</strong> goes fourth — but it's the first thing cut when life shrinks the week. Volume from easy sessions is replaceable; the anchor stimulus is not.</li>
+      </ol>
+
+      <p>If the week's so tight that even one anchor has to go, the coach drops the <em>quality session</em> first, then halves the long run, then halves the long ride. The long ride is the last thing to fall.</p>
+
+      <p class="meta">ECHO covers the full session-prescription decision tree, including how to substitute brick sessions for separate bike+run anchors, how to layer quality work inside the long ride during Peak, and how the four anchors morph as a block progresses. Foundations gives coaches the vocabulary and the priority order so the choices their athletes' programs are making become legible.</p>
+    </section>
+
+    <section class="card" id="sec-bricks">
+      <h2>Brick Training <span class="pill">Workout type</span></h2>
+
+      <p>A <strong>brick</strong> is a bike session immediately followed by a run, with no real recovery between them. The name comes from how the legs feel — bricks — for the first kilometre of the run. For triathletes, this is the single most important workout type that doesn't get its own block: it's how the body learns the race-day skill of <em>running well on bike-fatigued legs</em>.</p>
+
+      <p>Coaches working with runners and cyclists who aren't crossing modalities can mostly skip this section. Tri coaches and AG triathletes should treat it as required reading.</p>
+
+      <h3>The physiology — what changes the moment you step off the bike</h3>
+
+      <p>Understanding why bricks feel terrible the first time you do them makes the protocol obvious. Four things shift at once:</p>
+
+      <ol>
+        <li><strong>Blood flow redistributes (horizontal → vertical).</strong> On the bike, you've been horizontal for hours with steady, supported blood flow. The instant you stand up, gravity pools blood in the legs and the heart has to fight to re-circulate. The first 30-60 seconds off the bike: dizziness, light-headedness, sometimes a brief HR spike. With practice, this clears in seconds instead of a minute.</li>
+        <li><strong>Muscle recruitment shifts (quads → glutes / hamstrings).</strong> Cycling is quad-dominant. Running is glute- and hamstring-dominant. When the athlete starts running, the glutes and hams are asked to fire hard while they're still cold and under-recruited, and the quads — fatigued — can't help. That mismatch is the "jelly legs" feeling.</li>
+        <li><strong>Neuromuscular lag.</strong> The nervous system takes time to switch firing patterns. The first 5-15 minutes of running off the bike, recruitment is sloppy. Cadence drops. Form falls apart. With practice, the lag shortens — at first 15 minutes, eventually 5 minutes, on race day sometimes 2 minutes.</li>
+        <li><strong>HR rises for the same metabolic cost.</strong> Running is more thermally and mechanically demanding than cycling at equivalent intensity. HR can jump 10-20 bpm in the first kilometre even though pace and RPE haven't changed. This is normal — and a perfect demonstration of why ECHO uses HR as a <em>verifier</em>, not a primary anchor.</li>
+      </ol>
+
+      <h3>The three stages of brick training</h3>
+
+      <p>Bricks are progressed through three stages across a season. Doing race-simulation bricks in Base week 2 is how athletes get hurt; doing easy-easy bricks in race week is how athletes show up under-rehearsed. Match the stage to the block.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Stage</th>
+            <th>When (block)</th>
+            <th>Frequency</th>
+            <th>Format</th>
+            <th>What you're teaching</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Adaptation</strong></td>
+            <td>Base</td>
+            <td>1 brick every 2-3 weeks</td>
+            <td>60-90 min Z1 bike → immediate 15 min Z1 run</td>
+            <td>The transition itself. Body learns the blood-flow and recruitment shift in a low-stress setting. No intensity, no expectation.</td>
+          </tr>
+          <tr>
+            <td><strong>2. Rehearsal</strong></td>
+            <td>Build</td>
+            <td>1 brick per week</td>
+            <td>60-90 min Z2 bike → immediate 20-30 min Z2 run</td>
+            <td>Steady-state run off a controlled bike. Athlete proves they can hold race-adjacent pace on tired legs.</td>
+          </tr>
+          <tr>
+            <td><strong>3. Race simulation</strong></td>
+            <td>Peak</td>
+            <td>1-2 per week, usually replacing a separate bike+run day</td>
+            <td>Race-pace bike → immediate race-pace run. Durations approach race-distance fractions (e.g., 2h bike + 40min run for half-iron focus).</td>
+            <td>Full execution under race conditions: pacing, fueling timing, transition logistics, the mental moment of starting the run. By the time race day comes, none of this is new.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>The four brick rules — non-negotiable</h3>
+
+      <ol>
+        <li><strong>No walking.</strong> Get off the bike, change shoes (or don't), and start running within 30 seconds. Walking breaks the adaptation — the whole point is teaching the body to transition under fatigue. The only exception: if the athlete is truly broken (not "feels heavy" — broken), walk a bit and end the session early.</li>
+        <li><strong>First-kilometre discipline.</strong> The first 0.5-1.5 km will feel slow and heavy. <em>Expect it.</em> Do not speed up to "wake the legs up" — that's how the run blows up. Run easy until the legs come back (usually by km 1.5-2), then settle into the prescribed pace.</li>
+        <li><strong>Practice the transition exactly as race day.</strong> Same shoes, same towel layout, same nutrition. If the athlete races in cycling shoes off the bike, they practice in cycling shoes. If they swap to flats, they practice the swap. Race-day is not the day to rehearse logistics.</li>
+        <li><strong>Final bike fuel is taken 10-15 minutes before the dismount.</strong> Not 2 minutes before. Carbohydrate eaten right before transition doesn't reach the bloodstream until the athlete is already 5-10 minutes into the run, which is exactly when it's needed. Fuel taken at the wrong moment is fuel wasted, or worse — fuel that hits a vertical, jostling stomach and comes back up.</li>
+      </ol>
+
+      <div class="callout warning">
+        <div class="callout-title">Bricks are fatiguing — replace, don't add</div>
+        <p>A brick is harder than a separate bike session plus a separate run session of equivalent volume. Do not add bricks <em>on top of</em> normal training. Replace the Tuesday hard bike + Thursday long run with a single Tuesday brick + a Thursday easy session. Coaches who layer bricks on top of full training plans produce broken athletes.</p>
+      </div>
+
+      <p class="meta">ECHO covers brick programming inside specific race-build templates — when to substitute bricks for separate sessions, how to taper bricks before an A-race, and the long-brick / race-simulation calendar for half-iron and full-iron builds. Foundations gives the vocabulary, the physiology, the three stages, and the four rules so coaches can prescribe bricks safely before they graduate to ECHO's full templates.</p>
+    </section>
+
+    <section class="card" id="sec-stress-budget">
+      <h2>The Stress Budget &amp; Plan A / Plan B <span class="pill">When life happens</span></h2>
+
+      <p>The single hardest lesson for a new coach: <strong>training stress is not the only stress your athlete is carrying.</strong> Work deadlines, kids' schedules, poor sleep, travel, emotional load — all of it draws from the same recovery budget that training draws from. A plan that ignores total load and only counts training hours is a plan that will break the athlete the first month it meets real life.</p>
+
+      <h3>Total stress = training + work + family + sleep + emotional load</h3>
+
+      <p>Every human has a finite recovery capacity per week. Call it 100 units, for simplicity. Training claims some. Work claims some. Family claims some. Sleep <em>repays</em> some (good sleep) or <em>borrows</em> some (poor sleep). Emotional load claims some. When the total exceeds capacity, adaptation stops and the athlete moves toward illness, injury, or burnout.</p>
+
+      <p>This is why the same 12-hour training week feels easy in March and crushing in May. The training didn't change. The rest of the budget did.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Week type</th>
+            <th>Approximate load profile</th>
+            <th>Coaching call</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Calm week</strong></td>
+            <td>Work moderate, sleep solid (7-8 h), family stable, training 10-12 h. Total well under budget.</td>
+            <td>Level 2 default. Consider Level 3 if this is a peak window of the Build/Peak block.</td>
+          </tr>
+          <tr>
+            <td><strong>Loaded week</strong></td>
+            <td>Work spike (deadline, travel) or family demand (sick kid, partner traveling) or sleep dip (5-6 h, fragmented). One major non-training stressor.</td>
+            <td>Drop to Level 2 if you were Level 3 — or Level 1 if you were Level 2. <em>Cut filler, keep anchors.</em></td>
+          </tr>
+          <tr>
+            <td><strong>Crisis week</strong></td>
+            <td>Multiple non-training stressors stack: work emergency + sick child + poor sleep + travel all in the same window.</td>
+            <td>Level 1 only. No intensity, no goal workouts, no hero efforts. The job this week is to keep the athlete <em>alive</em> in the sport — not move them forward. Forward starts again next week.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>The five stress types — and how each one degrades recovery differently</h3>
+
+      <ul>
+        <li><strong>Work deadlines.</strong> Mental load activates cortisol, which interferes with sleep and recovery for days after the deadline ends. Even when the calendar clears, recovery lags by 1-2 weeks. Coach response: drop volume during the deadline; ramp <em>slowly</em> after.</li>
+        <li><strong>Poor sleep.</strong> This is the highest-impact stressor most coaches under-weight. Sleep is when adaptation actually happens. Five-hour-night weeks aren't training weeks; they're cortisol weeks. Coach response: aggressive volume cut. If sleep doesn't recover, training has no destination.</li>
+        <li><strong>Family disruption.</strong> Sick kids, aging parents, partner illness, family emergencies. Time is fragmented, sleep is broken, emotional load is high. Coach response: minimal training, no guilt, full presence with family. The fitness will be there in three weeks. The relationship damage from being absent during a crisis is not as easy to undo.</li>
+        <li><strong>Travel.</strong> New time zone, hotel beds, disrupted meal timing, limited gear. Coach response: travel weeks become run-heavy weeks (running is always available). Skip the bike and pool if access is hard. Accept the dip.</li>
+        <li><strong>Emotional / mental stress.</strong> Anxiety, grief, relationship strain, life uncertainty. Often the most invisible stressor — and the most destructive to recovery. Coach response: easy training only (Z1 movement can be therapeutic), no intensity. Suggest the athlete talk to someone if the load is sustained.</li>
+      </ul>
+
+      <h3>Plan A vs Plan B — write both in advance</h3>
+
+      <p>The most useful planning move a coach makes is writing two versions of every week <em>before</em> the week starts. Plan A is the ideal version. Plan B is the survival version. The athlete doesn't choose between them on Monday — they choose throughout the week based on how recovery is actually going.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Plan A — calm life</th>
+            <th>Plan B — busy life</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Level</strong></td>
+            <td>Level 2 or Level 3</td>
+            <td>Level 1 or Level 2</td>
+          </tr>
+          <tr>
+            <td><strong>Sessions</strong></td>
+            <td>All four anchors + filler + possibly a second quality session</td>
+            <td>Four anchors only — possibly shortened (e.g., long ride from 4h to 2.5h)</td>
+          </tr>
+          <tr>
+            <td><strong>Intensity</strong></td>
+            <td>Block-appropriate (Z3 work in Build, VO2 Max in Peak)</td>
+            <td>Reduced or cut entirely; all Z1-Z2 in a real Plan B week</td>
+          </tr>
+          <tr>
+            <td><strong>Training priority</strong></td>
+            <td>Priority #1-2 in the athlete's life this week</td>
+            <td>Priority #3-4; work and family come first</td>
+          </tr>
+          <tr>
+            <td><strong>Mental frame</strong></td>
+            <td>Build week — push the adaptation</td>
+            <td>Maintenance week — keep the body moving and the habit alive</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout coach-note">
+        <div class="callout-title">Both plans are valid — switching mid-week is not failure</div>
+        <p>A common coaching mistake is treating Plan B as the failure version. It isn't. Plan B is the version that <em>keeps the athlete in the sport</em> through a crisis week. A coach who can move an athlete from Plan A to Plan B on a Wednesday — without drama, without guilt, without rebuilding the relationship from scratch — is doing the actual work of coaching adults with real lives. The athlete who survives 12 weeks on a mix of Plan A and Plan B weeks finishes the race. The athlete who tries to force Plan A through every week breaks in week 5.</p>
+      </div>
+
+      <h3>The missed-session decision tree</h3>
+
+      <p>Sessions get missed. That's not a problem — that's life. The problem is the catch-up reflex. Athletes who try to "make up" a missed week by doing a hero week the following week do not get fit faster. They get broken faster. The rule is the same at every duration: <strong>resume, don't make up.</strong></p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Time off</th>
+            <th>Cause (typical)</th>
+            <th>Coach action</th>
+            <th>How long until full normal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1 session</strong></td>
+            <td>One missed workout — bad day, work ran late</td>
+            <td>Move on. Do the next scheduled session as written. Do not stack the missed session on top of another day.</td>
+            <td>Same week — no impact</td>
+          </tr>
+          <tr>
+            <td><strong>2-3 sessions in a week</strong></td>
+            <td>A few missed in a busy stretch</td>
+            <td>Protect the anchors. Cut filler. Do whichever anchors are left this week. Resume normal next week.</td>
+            <td>1 week</td>
+          </tr>
+          <tr>
+            <td><strong>3-7 days</strong></td>
+            <td>Short illness, brief crisis, mild burn</td>
+            <td>Return one level easier. If the athlete was Level 3, drop to Level 2 for one week. Zero intensity in the return week. Resume normal in week 2.</td>
+            <td>1-2 weeks</td>
+          </tr>
+          <tr>
+            <td><strong>8-14 days</strong></td>
+            <td>Real illness, work crisis, family emergency</td>
+            <td>Re-entry protocol: <em>Week 1</em> Level 1 (4-6 h, all easy). <em>Week 2</em> Level 2 (add back one quality session). <em>Week 3</em> normal. Expect performance to feel down — that's normal, it returns.</td>
+            <td>2-3 weeks</td>
+          </tr>
+          <tr>
+            <td><strong>15+ days</strong></td>
+            <td>Serious illness, injury recovery, major life event</td>
+            <td>Mini reset. Treat the first 1-2 weeks back as a fresh Base block — Level 1, ZR-Z1 only, focus on routine. Add anchors back in weeks 3-4. Resume normal in week 5.</td>
+            <td>3-5 weeks</td>
+          </tr>
+          <tr>
+            <td><strong>Sick — any duration</strong></td>
+            <td>Active infection</td>
+            <td>Rest until symptoms clear. <em>Above the neck</em> only (head cold, no fever) — light Z1 movement may be okay. <em>Below the neck</em> or any fever — full rest, no exceptions. Resume the protocol above for the duration the athlete was sick.</td>
+            <td>2× the missed period</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="meta">ECHO covers the full re-entry templates by block phase, the ATL/CTL recalibration after a layoff, and the decision rules around moving an A-race timeline when a missed period is long enough to compromise the build. Foundations gives the coach-and-athlete-facing version: how to triage a missed week without panic, and how to come back without breaking the athlete a second time.</p>
+    </section>
+
+    <section class="card" id="sec-stability">
+      <h2>Stability — the Hidden Driver of Durability <span class="pill">Theory</span></h2>
+
+      <p>Two athletes train the same total volume over 10 weeks — 100 hours each. One ends the period stronger, healthier, and ready for a big race. The other ends fatigued, plateaued, and probably nursing a niggle. The difference is almost never <em>total</em> volume. It's <strong>stability</strong> — how consistent the week-to-week training load actually is.</p>
+
+      <h3>The stability index</h3>
+
+      <p>Stability is the week-to-week variance in training load. A simple working definition for coaches:</p>
+
+      <div class="callout">
+        <div class="callout-title">Stability rule of thumb</div>
+        <p><strong>Aim for under 10% week-to-week variance</strong> in training hours during a normal block. If this week is 10 hours, next week should land between 9 and 11 — not 5 and not 15. Recovery weeks are the planned exception (~50-65% of normal); those are scheduled, not random.</p>
+      </div>
+
+      <p>Why does this matter so much? Because the body adapts to <em>consistent</em> stimulus, not to the average of wildly different stimuli. An athlete who does 10h / 5h / 15h / 6h / 14h has the same 10-hour average as the athlete who does 10h / 10.5h / 9.5h / 11h / 10h — but the first athlete's body never gets a chance to actually adapt. It's constantly responding to a new shock or de-training back to baseline.</p>
+
+      <h3>The four consistency patterns coaches see</h3>
+
+      <p>Every age-group athlete falls into one of four patterns. Three of them are problems. One of them is the goal.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Pattern</th>
+            <th>What it looks like</th>
+            <th>Body response</th>
+            <th>Outcome</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>The textbook plan</strong><br><em>Rare</em></td>
+            <td>Every week hits exactly to plan. Smooth linear progression. Zero life interruptions.</td>
+            <td>Excellent adaptation — when it happens.</td>
+            <td>Almost no one sustains this. Don't plan as if your athlete will. Plan for the messy version.</td>
+          </tr>
+          <tr>
+            <td><strong>Life happens</strong><br><em>Common — most age-groupers</em></td>
+            <td>Solid weeks alternated with Plan B weeks. Forward overall trend with realistic ups and downs.</td>
+            <td>Good adaptation, slower than textbook but sustained.</td>
+            <td>Workable. This is what most successful athletes actually look like. The trajectory matters more than any single week.</td>
+          </tr>
+          <tr>
+            <td><strong>Weekend warrior</strong><br><em>Dangerous</em></td>
+            <td>Almost nothing Monday-Thursday. Massive volume Friday-Sunday. Boom-and-bust spikes every week.</td>
+            <td>Body never adapts — it's constantly recovering from spikes or de-training in the gaps. High injury risk.</td>
+            <td>Burnout or injury before race day. Frequent. Almost every athlete who comes to a coach with chronic IT band, Achilles, or knee issues is running this pattern.</td>
+          </tr>
+          <tr>
+            <td><strong>Steady</strong><br><em>The goal</em></td>
+            <td>Similar volume every week (under 10% variance). Same anchor sessions in the same windows. Filler flexes; structure doesn't.</td>
+            <td>Adaptation compounds. Each week's gains build on the last. Recovery markers stay green. Injury risk low.</td>
+            <td>The pattern of athletes who PR, who qualify, who stay healthy across multiple seasons.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>How to build stability into a real schedule</h3>
+
+      <ol>
+        <li><strong>Design the weekly structure once.</strong> Lock the anchors into specific days and time windows: long ride Saturday 7-10 AM; long run Sunday 7-8:30 AM; quality session Tuesday 5:30 PM; easy frequency in whatever gaps exist. Then <em>repeat that exact frame every week</em>.</li>
+        <li><strong>Flex inside the frame, not around it.</strong> When life shrinks the week, Tuesday's quality session might shrink from 60 min to 40 min — but it still happens, in the same window, on the same day. The structure survives; the dose flexes.</li>
+        <li><strong>Use levels — not session-swapping — to absorb life stress.</strong> A coach who responds to a busy week by moving Saturday's long ride to Wednesday and Sunday's long run to Friday has destabilized the schedule. A coach who responds by keeping Saturday's long ride but cutting it from 3.5h to 2h has kept stability intact. Same anchor, smaller dose.</li>
+        <li><strong>Cap the upside in calm weeks.</strong> The temptation in a calm week after a hard one is to add an extra long session "since I have time." Resist. A 12h week followed by a 16h week followed by a 9h week is more destabilizing than three steady 12h weeks. Save the upside for the planned peak window.</li>
+      </ol>
+
+      <p class="meta">ECHO covers stability as one of multiple inputs into block design, including how stability interacts with CTL ramp rate, when controlled variance is <em>useful</em> (taper, peak overreach), and the formal week-over-week ratio targets per phase. Foundations gives the coach the vocabulary and the rule of thumb so they can recognize the pattern in an athlete's training file at a glance.</p>
+    </section>
+
+    <section class="card" id="sec-metrics">
+      <h2>Metrics Dashboard — TSS, CTL, ATL, TSB <span class="pill">Data literacy</span></h2>
+
+      <p>Most age-group athletes — and a lot of newer coaches — either ignore training-load metrics entirely or treat them as gospel. Neither extreme works. The four metrics below are <strong>tools for asking better questions</strong>, not verdicts on whether the athlete is doing well. Used honestly, they cut weeks of guessing out of the coaching process.</p>
+
+      <h3>The four numbers and what each one is for</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>What it measures</th>
+            <th>Time window</th>
+            <th>Typical range</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>TSS</strong><br>Training Stress Score</td>
+            <td>The load of a single workout. Combines duration and intensity into one number. Computed by the platform from power/pace/HR vs the athlete's threshold anchor.</td>
+            <td>Per session</td>
+            <td>50 = easy 1h · 100 = hard 1h or moderate 2h · 200+ = very hard or very long</td>
+          </tr>
+          <tr>
+            <td><strong>CTL</strong><br>Chronic Training Load</td>
+            <td>The 42-day rolling average of daily TSS. The "fitness bank." Moves slowly — it takes weeks of consistent work to build CTL, and weeks of detraining to lose it.</td>
+            <td>~6 weeks</td>
+            <td>40-100 for most endurance athletes. CTL ≈ 60 means the athlete averages ~60 TSS / day or ~420 TSS / week.</td>
+          </tr>
+          <tr>
+            <td><strong>ATL</strong><br>Acute Training Load</td>
+            <td>The 7-day rolling average of daily TSS. The "fatigue debt." Moves fast — one hard week spikes it, one easy week brings it down.</td>
+            <td>1 week</td>
+            <td>30-100. Tracks current fatigue, not fitness.</td>
+          </tr>
+          <tr>
+            <td><strong>TSB</strong><br>Training Stress Balance</td>
+            <td>CTL minus ATL. The "freshness" score. Positive = recovered relative to the chronic load; negative = currently fatigued. <em>This is the actionable number.</em></td>
+            <td>Live</td>
+            <td>-50 to +50. Bands below.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>The TSB bands — how to actually use the number</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>TSB range</th>
+            <th>Athlete state</th>
+            <th>Coach response</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>+10 or higher</strong></td>
+            <td>Very fresh. Possibly under-loaded. Race-ready territory in the final taper days.</td>
+            <td>Good day for a hard session. If sustained for weeks without intent, the athlete is detraining — add load.</td>
+          </tr>
+          <tr>
+            <td><strong>+5 to +10</strong></td>
+            <td>Fresh, ready for hard work.</td>
+            <td>Green light on Z3 / VO2 Max sessions. Race-pace work lands well here.</td>
+          </tr>
+          <tr>
+            <td><strong>0 to +5</strong></td>
+            <td>Neutral. Normal mid-week state during a Build block.</td>
+            <td>Normal sessions as prescribed. No special action.</td>
+          </tr>
+          <tr>
+            <td><strong>0 to -10</strong></td>
+            <td>Slightly fatigued. Normal late in a hard week.</td>
+            <td>Normal sessions still okay, but flag the trend. If TSB doesn't recover by the weekend, the week was too much.</td>
+          </tr>
+          <tr>
+            <td><strong>-10 to -20</strong></td>
+            <td>Fatigued. Body is in deficit.</td>
+            <td>Drop a quality session this week. Replace it with easy. Watch recovery markers (sleep, mood, morning HR). Re-check TSB in 3-4 days.</td>
+          </tr>
+          <tr>
+            <td><strong>Below -20</strong></td>
+            <td>Very fatigued. Adaptation is no longer happening. Injury and illness risk both elevated.</td>
+            <td>Take 3-7 days easy (Level 1, ZR-Z1 only). No intensity. Re-check TSB. If still under -20 after the easy period, there's a deeper issue — sleep, life stress, illness, or overtraining — investigate before resuming.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Reading the dashboard like a coach, not a robot</h3>
+
+      <p>The metrics tell you <em>what</em> happened. They do not tell you <em>why</em> — and the why is where coaching lives. Three rules:</p>
+
+      <ol>
+        <li><strong>Trend matters more than any single day.</strong> TSB at -15 after a hard Saturday is normal. TSB drifting from -5 to -10 to -15 over three weeks while volume hasn't changed is a problem. Look at the slope, not the point.</li>
+        <li><strong>The number doesn't tell you the cause.</strong> A negative TSB during a planned overreach week is exactly correct. A negative TSB during a planned recovery week is a warning sign — either the athlete didn't recover, or non-training stress is high, or the calibration is off (stale CP, stale CS, garbage TSS values). Always ask which one.</li>
+        <li><strong>Subjective markers outrank the dashboard when they disagree.</strong> If TSB says +12 but the athlete is sleeping poorly, dreading sessions, and waking up tired, the athlete is right and the dashboard is wrong. The dashboard is a model. The athlete is the system the model is trying to describe.</li>
+      </ol>
+
+      <div class="callout coach-note">
+        <div class="callout-title">When TSS values lie</div>
+        <p>TSS is computed from the athlete's threshold anchors — CP for bike, CS for run / swim, LTHR for HR-only sessions. If those anchors are stale (last tested 12+ weeks ago, fitness has shifted), every TSS calculation since the last update is wrong, which means CTL and ATL are wrong, which means TSB is wrong. The first move whenever the metrics seem off-pattern is to ask <em>when did we last update CP / CS / LTHR?</em> Per ECHO, the retest cadence is every 6-8 weeks during active training.</p>
+      </div>
+
+      <p class="meta">ECHO covers the full load-management decision framework: how to plan a CTL ramp rate appropriate to the athlete and the race, how to use TSB targets for peak-and-taper sequencing, and how to triangulate the dashboard against subjective wellness scores and HRV. Foundations gives the coach the vocabulary and the action bands so the numbers in TrainingPeaks (or any equivalent platform) stop being noise and start being signal.</p>
+    </section>
+
+    <section class="card" id="sec-personalized-sequencing">
+      <h2>CP : VO2 Ratio — Personalized Block Sequencing <span class="pill">Advanced</span></h2>
+
+      <p>The generic Base → Build → Peak → Taper sequence works for the average athlete. But coaches who only know the generic sequence will mis-program the athletes at either end of the physiological spectrum — and those athletes are the ones who came looking for a coach precisely because the generic plans haven't worked for them.</p>
+
+      <p>The diagnostic tool: the <strong>CP : VO2 Max ratio</strong>. It tells the coach <em>which</em> system to develop first, before sequencing the blocks the standard way.</p>
+
+      <div class="callout echo-supreme">
+        <div class="callout-title">ECHO compliance check</div>
+        <p>This section uses ECHO's block vocabulary (<strong>Base, Build, Peak, Taper, Recovery</strong>) only. It does <em>not</em> introduce new block types or reorder them in conflict with the ECHO Manual — it adjusts <em>duration and emphasis</em> within the standard sequence based on the athlete's physiological profile. ECHO retains full authority over block selection and progression rules.</p>
+      </div>
+
+      <h3>What the ratio measures</h3>
+
+      <p>CP : VO2 Max ratio = Critical Power divided by VO2 Max power.</p>
+
+      <ul>
+        <li><strong>CP</strong> is the highest sustainable power in a quasi-steady state — the threshold output. It is the bike anchor for all zone work.</li>
+        <li><strong>VO2 Max power</strong> is the peak aerobic power output — what the athlete can produce for a few minutes at maximal aerobic effort.</li>
+        <li>The ratio between them tells the coach where the athlete's current weakness lives: is their threshold weak relative to their ceiling, or is their ceiling weak relative to their threshold?</li>
+      </ul>
+
+      <p><em>Example:</em> CP = 280 W, VO2 Max power = 350 W → ratio = 0.80. That's an anaerobic profile — high peak, lower sustainable. Different programming than an athlete at CP 270 W / VO2 Max 305 W (ratio 0.89, aerobic profile — sustainable ceiling, lower peak).</p>
+
+      <h3>The three profiles and the programming response</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Profile</th>
+            <th>Ratio</th>
+            <th>What it means</th>
+            <th>How the standard block sequence adjusts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Anaerobic profile</strong></td>
+            <td>Below 0.83</td>
+            <td>High peak power, weak threshold. Often a former cyclist or runner with sprint or short-event history. Can produce a big watt for 3-5 min but can't sustain hard work for 30-60 min — exactly what long-course racing demands.</td>
+            <td><strong>Extend Build.</strong> Add 1-2 weeks of threshold-heavy Build before moving into Peak. Goal: raise CP first; let VO2 Max work in Peak land on a higher floor. Skipping this and going straight to Peak / VO2 Max work wastes the ceiling work — the threshold isn't strong enough to support it.</td>
+          </tr>
+          <tr>
+            <td><strong>Balanced profile</strong></td>
+            <td>0.83 to 0.87</td>
+            <td>Threshold and peak are proportional. Most well-rounded endurance athletes land here.</td>
+            <td><strong>Standard sequence.</strong> Base → Build → Peak → Taper as written. The textbook progression is right for this athlete.</td>
+          </tr>
+          <tr>
+            <td><strong>Aerobic profile</strong></td>
+            <td>Above 0.87</td>
+            <td>Strong threshold relative to peak. Often a long-time endurance athlete with deep aerobic development but limited top-end. Can sustain steady work for hours but lacks the ceiling for late-race surges or short-course racing.</td>
+            <td><strong>Shift VO2 Max work earlier in the build year.</strong> Insert a focused VO2 Max emphasis inside Build (not waiting for Peak) to raise the ceiling, then transition into a threshold-maintenance Build, then standard Peak / Taper. Skipping ceiling work and only doing more threshold work makes the imbalance worse.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Why this matters for long-course coaching</h3>
+
+      <p>Long-course racing is overwhelmingly a Base + threshold game. The peak-power ceiling matters less than for short-course racing because the athlete is never asked to produce maximal aerobic power for more than seconds at a time. But the ratio still matters — because <strong>where the athlete is currently weak determines what they need <em>now</em>, regardless of what the eventual race demands</strong>.</p>
+
+      <p>An anaerobic-profile half-iron athlete needs threshold work before they need long endurance work, because their current limiter is sustainable power, not peak power and not aerobic capacity. An aerobic-profile half-iron athlete might actually benefit from a short VO2 Max emphasis early in the year just to raise the ceiling enough that threshold work has somewhere to grow into.</p>
+
+      <div class="callout coach-note">
+        <div class="callout-title">Get the ratio honestly or don't use it</div>
+        <p>The ratio only works if both CP and VO2 Max power are measured cleanly. CP comes from the standard ECHO 3 / 6-or-8 / 12-min protocol. VO2 Max power is harder to measure honestly without lab testing — a field-test 5-min maximal effort is a reasonable proxy when the athlete is fresh, fueled, and motivated. If either number is sketchy (stale, fatigued, badly paced), the ratio is meaningless and the standard sequence is the safer default.</p>
+      </div>
+
+      <p class="meta">ECHO covers the full personalized-sequencing decision framework, including how to layer the CP : VO2 Max ratio against the swim-strength / run-durability profile for triathletes, and how to revisit the ratio mid-season as the athlete's profile shifts in response to training. Foundations gives the coach the tool, the three profiles, and the standard programming responses so the right question gets asked before the generic sequence gets handed over.</p>
+    </section>
+
+    <section class="card" id="sec-time-design">
+      <h2>Time Design, the Family Talk &amp; Collaborative Training <span class="pill">The human side</span></h2>
+
+      <p>Every coaching tool in this manual so far — zones, blocks, anchors, levels, the stress budget, the dashboard — fails if the athlete's life isn't structured to deliver the training. The most common reason age-groupers fall off training plans isn't lack of fitness, lack of motivation, or even injury. It's that they tried to <em>find</em> time for training in a life that didn't make room for it. The fix is structural, and it starts before the first workout.</p>
+
+      <h3>Design the time — don't try to find it</h3>
+
+      <p>The default human approach to fitting in training: wake up, look at the day, hope a window opens up. That approach loses to every other priority in the athlete's life — meetings, kids, errands, decision fatigue, the couch — every single day. The structural alternative:</p>
+
+      <ol>
+        <li><strong>Lock the anchors first, on the calendar, before anything else.</strong> Saturday 7-10 AM = long ride. Sunday 7-8:30 AM = long run. Tuesday 5:30-6:30 PM = quality session. Thursday 5:30-6:15 PM = quality run or swim. These are <em>calendar events</em>, not intentions. They get the same treatment as a doctor's appointment.</li>
+        <li><strong>Fill the gaps with easy frequency.</strong> 30-minute easy run before work. Lunch-break swim. Easy spin after dinner. Easy sessions don't need protected windows; they fit into the cracks that already exist in the calendar.</li>
+        <li><strong>Make the structure repetitive across weeks.</strong> Same anchor sessions, same days, same windows, week after week. Predictability removes decision fatigue. By week 4, the athlete isn't choosing whether to train at 5:30 AM on Tuesday — they're just doing what Tuesday is. That's the goal.</li>
+      </ol>
+
+      <h3>Constraints clarify priorities</h3>
+
+      <p>Coaches who've worked with both unlimited-time athletes and severely time-constrained athletes know a counterintuitive truth: <strong>the constrained athletes often train better</strong>. Eight hours of forced focus beats fifteen hours of unfocused fitting-it-in. Limits force the athlete to:</p>
+
+      <ul>
+        <li>Cut filler. Every session has to earn its slot.</li>
+        <li>Simplify logistics. Same gear, same fuel, same route. No decision tax on workout day.</li>
+        <li>Travel-proof the week. When the bike or pool isn't available, the runnable session always is. Build a fallback by default.</li>
+        <li>Sync with family rhythms. The training windows are the ones the family already accepts; conflict drops.</li>
+      </ul>
+
+      <p>A useful coaching reframe when an athlete complains they don't have enough time: <em>"You're probably right. Let's design eight focused hours instead of trying to find twelve."</em> The athlete who trains eight purposeful hours per week for twelve consecutive weeks finishes ahead of the athlete who tries to train fifteen and disappears in week six.</p>
+
+      <h3>The Family Talk — the conversation that has to happen before week one</h3>
+
+      <p>Resentment is the single biggest reason age-group athletes quit training mid-build. Not injury. Not fitness plateau. <strong>Resentment</strong> — from the partner who didn't sign up for Saturday-morning solo parenting, from the kids who keep getting told "after my run," from the athlete themselves who feels guilty every Sunday afternoon. The conversation that prevents resentment is short, deliberate, and happens before any training plan begins.</p>
+
+      <div class="callout">
+        <div class="callout-title">A working script — the opener</div>
+        <p>Sit down with the partner / family at a calm moment (not while cooking, not while watching the kids, not at the end of a stressful day). Open with:</p>
+        <p><em>"I want to train for [race / event]. It matters to me. But not at the cost of us. I want us to figure this out together. What are your questions? What concerns you?"</em></p>
+        <p>Then <strong>listen</strong>. Don't defend. The real concerns will surface: <em>"Will you be present when you're home?" "Are we losing our weekends?" "Why does this matter to you?" "Is this safe?"</em> Each one gets an honest answer, not a deflection.</p>
+      </div>
+
+      <p>The conversation has three jobs: <strong>(1)</strong> make the time commitment visible and bounded (8-12 weeks, ~10 hours per week, mostly early morning); <strong>(2)</strong> set explicit untouchable family time zones (e.g., Friday night, Saturday afternoon, Sunday dinner — no training, no exceptions); <strong>(3)</strong> ask the partner directly when they can support a hard week and when they can't, so the level decisions later have buy-in.</p>
+
+      <h3>Untouchable family windows — written down, honored without exception</h3>
+
+      <p>The most powerful move from the Family Talk: explicit, named, honored family windows where training never happens. Examples coaches see work:</p>
+
+      <ul>
+        <li><strong>Weekday dinners.</strong> Home by 6:30 PM, no training after, every weekday. Partner and kids see the athlete at the dinner table every night — that single fact dissolves most weekday resentment.</li>
+        <li><strong>Friday night = date night.</strong> No training, no early bedtime for tomorrow's long ride. The partner gets one inviolable couple night every week.</li>
+        <li><strong>Saturday afternoon = family time.</strong> Long ride ends by 10 or 11 AM. The rest of Saturday is family. Long-ride days are also family days.</li>
+        <li><strong>Sunday evenings.</strong> No training after the long run. Sunday from noon onward belongs to the family.</li>
+      </ul>
+
+      <p>The windows aren't suggestions. They're <em>structural</em>. The athlete doesn't decide each week whether to honor them — they're already in the calendar, in red, with the same protection level as the anchor workouts. Both blocks of time get treated as non-negotiable.</p>
+
+      <h3>Collaborative training — integrate, don't isolate</h3>
+
+      <p>The hidden risk of an early-morning + weekend-anchor structure: the athlete trains entirely alone, the family sees fitness as the thing that takes the athlete <em>away</em> from them. The fix is collaborative training — sessions designed to include family or friends, scheduled deliberately:</p>
+
+      <ul>
+        <li><strong>Easy runs with kids on bikes / scooters.</strong> 30-45 min on safe routes. Counts as Z1 volume; reads as family time.</li>
+        <li><strong>Social rides with coffee stops.</strong> Easy bike with a friend or partner, planned café stop halfway. Z1 the whole way. Athlete gets the volume; partner gets the connection.</li>
+        <li><strong>Family walks for active recovery.</strong> 30-45 min after dinner, conversational pace. Counts as ZR-Z1 movement; reads as evening family time.</li>
+      </ul>
+
+      <p>One or two collaborative sessions per week — particularly during easy weeks or recovery weeks — moves the family's experience of training from "the thing that takes them away" to "the thing they're part of." Partners of athletes who get this right are usually the ones at the finish line.</p>
+
+      <div class="callout coach-note">
+        <div class="callout-title">Coaching note — the integration question</div>
+        <p>A useful question to ask new athletes in the first or second session: <em>"What's one easy session this week we could design so your partner / kid is part of it?"</em> The answer tells the coach a lot about whether the athlete sees training as something they're doing <em>with</em> their life or <em>against</em> it. Athletes who can't think of one are usually the ones who quit in week five.</p>
+      </div>
+
+      <p class="meta">ECHO doesn't directly cover the human-side logistics of family integration — that's traditionally treated as outside the coaching scope. Foundations explicitly includes it because, in practice, no zone system or block sequence survives a training relationship the family resents. The four-anchor / level-based system in this manual works <em>because</em> it makes room for the conversation; if the conversation never happens, the system breaks for human reasons before it has a chance to break for physiological ones.</p>
     </section>
 
     <section class="card" id="sec-fueling">
