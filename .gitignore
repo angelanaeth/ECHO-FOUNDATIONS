@@ -10,3 +10,4 @@ dist/
 .idea/
 # the synced canonical file is committed so the diff history is visible
 # (do NOT add content/canonical.from-echo.json here)
+content/drafts/
