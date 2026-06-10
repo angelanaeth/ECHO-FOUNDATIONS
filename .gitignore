@@ -1,0 +1,12 @@
+node_modules/
+.wrangler/
+.dev.vars
+.env
+.env.local
+*.log
+.DS_Store
+dist/
+.vscode/
+.idea/
+# the synced canonical file is committed so the diff history is visible
+# (do NOT add content/canonical.from-echo.json here)

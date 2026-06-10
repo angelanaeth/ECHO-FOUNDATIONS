@@ -1,0 +1,66 @@
+name: Deploy Foundations
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-foundations-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install
+        run: npm install --no-audit --no-fund
+
+      - name: Sync canonical from ECHO-MANUAL
+        id: sync
+        env:
+          GITHUB_TOKEN: ${{ secrets.ECHO_MANUAL_READ_TOKEN }}
+        run: node scripts/sync-canonical.mjs || [ $? -eq 2 ]
+        # exit 2 = drift detected, but we still want to deploy the fresh values
+
+      - name: Expand canonical placeholders into HTML
+        run: node scripts/expand-canonical.mjs
+
+      - name: Drift check (Foundations vs ECHO canonical)
+        run: node scripts/drift-check.mjs
+
+      - name: Stamp version.json with commit + build time
+        run: |
+          mkdir -p public
+          cat > public/version.json <<EOF
+          { "app": "echo-foundations", "commit": "${{ github.sha }}", "branch": "${{ github.ref_name }}", "built_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)" }
+          EOF
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken:  ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy public --project-name=echo-foundations --branch=main
+
+      - name: Wait for propagation
+        run: sleep 30
+
+      - name: Smoke test (foundations health)
+        env:
+          PROBE: ${{ secrets.DEPLOY_PROBE_SECRET }}
+        run: |
+          set -euo pipefail
+          echo "Checking /api/health…"
+          BODY=$(curl -sS https://echo-foundations.pages.dev/api/health)
+          echo "$BODY"
+          echo "$BODY" | grep -q '"ok": true' || { echo "Health failed"; exit 1; }
+          echo "✓ health ok"

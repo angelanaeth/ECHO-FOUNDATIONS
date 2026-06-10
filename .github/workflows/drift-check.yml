@@ -1,0 +1,67 @@
+name: Drift Check (Foundations vs ECHO)
+
+on:
+  schedule:
+    - cron: "17 7 * * *"    # daily at 07:17 UTC
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "content/canonical.from-echo.json"
+      - "scripts/sync-canonical.mjs"
+      - "scripts/drift-check.mjs"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install
+        run: npm install --no-audit --no-fund
+
+      - name: Sync canonical from ECHO-MANUAL (no fail on drift)
+        id: sync
+        env:
+          GITHUB_TOKEN: ${{ secrets.ECHO_MANUAL_READ_TOKEN }}
+        run: |
+          set +e
+          node scripts/sync-canonical.mjs
+          rc=$?
+          echo "sync_exit=$rc" >> "$GITHUB_OUTPUT"
+          if [ $rc -eq 0 ] || [ $rc -eq 2 ]; then exit 0; else exit $rc; fi
+
+      - name: Open drift PR if canonical changed
+        if: steps.sync.outputs.sync_exit == '2'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: drift/canonical-${{ github.run_id }}
+          base: main
+          title: "Drift detected: Foundations canonical out of sync with ECHO"
+          body: |
+            The automated drift check detected that `shared/canonical.json` in the
+            ECHO-MANUAL repo has changed since the last Foundations sync.
+
+            This PR updates `content/canonical.from-echo.json` to match ECHO.
+
+            **Review checklist:**
+            - [ ] Confirm the ECHO change is intentional
+            - [ ] Check whether any Foundations narrative prose mentions
+                  these values and needs to be updated to match
+            - [ ] Run `npm run drift-check` locally to scan for literal drift
+
+            Triggered by: `${{ github.event_name }}`
+            Workflow run: ${{ github.run_id }}
+          commit-message: "chore(canonical): sync from ECHO-MANUAL"
+          delete-branch: true

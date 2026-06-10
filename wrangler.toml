@@ -1,0 +1,19 @@
+name = "echo-foundations"
+compatibility_date = "2025-01-01"
+pages_build_output_dir = "public"
+
+# Vectorize index (for the Foundations chatbot — separate from ECHO's)
+[[vectorize]]
+binding = "VEC"
+index_name = "echo-foundations-corpus"
+
+# D1 database (audit log, sessions — separate from ECHO's)
+[[d1_databases]]
+binding = "DB"
+database_name = "echo-foundations"
+database_id = "00000000-0000-0000-0000-000000000000"  # ← replaced at first deploy
+
+# Secrets (set via wrangler pages secret put ...):
+#   OPENAI_API_KEY         — for the chatbot
+#   GITHUB_TOKEN           — for sync-canonical to pull from ECHO-MANUAL
+#   DEPLOY_PROBE_SECRET    — CI smoke-test header for *.pages.dev

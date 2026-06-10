@@ -1,0 +1,21 @@
+{
+  "name": "echo-foundations",
+  "version": "0.1.0",
+  "private": true,
+  "description": "EchoDevo Foundations Manual — intro/foundational coaching content, cross-checked against ECHO-MANUAL.",
+  "type": "module",
+  "scripts": {
+    "sync-canonical": "node scripts/sync-canonical.mjs",
+    "expand-canonical": "node scripts/expand-canonical.mjs",
+    "drift-check": "node scripts/drift-check.mjs",
+    "build": "npm run sync-canonical || [ $? -eq 2 ] && npm run expand-canonical && npm run drift-check",
+    "dev": "npx wrangler pages dev public --compatibility-date=2025-01-01",
+    "deploy": "npx wrangler pages deploy public --project-name=echo-foundations"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

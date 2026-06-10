@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EchoDevo Foundations Manual</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/chat/chat.css">
+
+  <style>
+    /* ── Design tokens (matches ECHO) ── */
+    :root {
+      --bg:        #f8f3e9;
+      --paper:    #fffaf0;
+      --ink:      #1a1a1a;
+      --muted:    #6a5a3a;
+      --accent:   #d65416;
+      --accent-2: #b08a3c;
+      --line:     #e6dac3;
+      --header-bg:#0a1628;
+      --header-fg:#f5f3ec;
+      --maxw:     980px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Brand header (matches ECHO) ── */
+    .brand-header {
+      background: var(--header-bg);
+      color: var(--header-fg);
+      border-bottom: 1px solid rgba(245,243,236,0.08);
+    }
+    .brand-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 14px clamp(24px, 4vw, 56px);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+    .brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+    .brand-name { font-size: 15px; font-weight: 700; color: var(--header-fg); }
+    .brand-sub  { font-size: 11.5px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); }
+    .brand-spacer { flex: 1; }
+    .brand-user {
+      font-size: 12.5px;
+      color: rgba(245,243,236,0.62);
+      letter-spacing: -0.005em;
+    }
+
+    /* ── Document layout ── */
+    main {
+      max-width: var(--maxw);
+      margin: 28px auto 96px;
+      padding: 0 clamp(24px, 4vw, 56px);
+    }
+    h1 { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 6px; }
+    .lede { color: var(--muted); font-size: 16px; margin: 0 0 28px; }
+
+    section.card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 22px 26px;
+      margin: 0 0 18px;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+    }
+    section.card h2 {
+      font-size: 19px; font-weight: 700; margin: 0 0 8px;
+      color: var(--ink);
+      display: flex; align-items: center; gap: 10px;
+    }
+    section.card h2 .pill {
+      font-size: 10.5px; font-weight: 600; letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent); background: rgba(214,84,22,0.08);
+      padding: 3px 8px; border-radius: 999px;
+    }
+    section.card p { margin: 8px 0; color: var(--ink); }
+    section.card p.meta { color: var(--muted); font-size: 14px; }
+
+    .empty-state {
+      border: 1px dashed var(--accent-2);
+      background: #fff;
+      color: var(--muted);
+      padding: 28px;
+      border-radius: 14px;
+      text-align: center;
+      margin: 24px 0;
+    }
+    .empty-state strong { color: var(--ink); display: block; margin-bottom: 4px; }
+
+    .canonical-callout {
+      background: rgba(176,138,60,0.08);
+      border-left: 3px solid var(--accent-2);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      font-size: 14px;
+      color: var(--muted);
+      margin: 16px 0;
+    }
+    .canonical-callout strong { color: var(--ink); }
+
+    footer {
+      max-width: var(--maxw);
+      margin: 48px auto 24px;
+      padding: 0 clamp(24px, 4vw, 56px);
+      color: var(--muted);
+      font-size: 12.5px;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      .brand-inner { padding: 12px 20px; }
+      h1 { font-size: 26px; }
+      section.card { padding: 18px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="brand-header">
+    <div class="brand-inner">
+      <span class="brand-mark">F</span>
+      <div class="brand-text">
+        <span class="brand-name">EchoDevo Foundations</span>
+        <span class="brand-sub">Coaching · Intro</span>
+      </div>
+      <span class="brand-spacer"></span>
+      <span class="brand-user" id="anc-user"></span>
+    </div>
+  </header>
+
+  <main>
+    <h1>Foundations Manual</h1>
+    <p class="lede">The intro-level coaching playbook for new EchoDevo coaches — before you graduate to the full ECHO Manual.</p>
+
+    <div class="empty-state">
+      <strong>This shell is live. Content coming soon.</strong>
+      Angela is feeding the foundations material in batches — intro, zones, and her own coaching notes — and every section is cross-checked against the ECHO Coaching Manual (the canonical source) before being published here.
+    </div>
+
+    <section class="card">
+      <h2>Welcome <span class="pill">placeholder</span></h2>
+      <p>This is the EchoDevo Foundations Manual. It exists to bring brand-new coaches into the EchoDevo system with a solid grounding in the foundational concepts — language, zones, block types, and our coaching philosophy — before they move on to the full ECHO Coaching Manual.</p>
+      <p class="meta">When this section is filled in, it will follow the same warm coach-to-coach tone you'll find throughout EchoDevo materials.</p>
+    </section>
+
+    <section class="card">
+      <h2>Zones <span class="pill">placeholder · canonical</span></h2>
+      <p>Heart-rate zones are the foundational anchor for everything we do. The values below are pulled directly from the ECHO Manual and will always match — if Angela changes a zone in ECHO, Foundations updates automatically.</p>
+      <div class="canonical-callout">
+        <strong>Canonical reference (live from ECHO):</strong> these values are auto-synced. Do not edit by hand.
+        <ul style="margin: 8px 0 0; padding-left: 18px;">
+          <li><strong>Z1 Recovery / Easy</strong> — {{canonical.zones.z1.range}} of LTHR</li>
+          <li><strong>Z2 Aerobic Endurance</strong> — {{canonical.zones.z2.range}} of LTHR</li>
+          <li><strong>Z3 Tempo</strong> — {{canonical.zones.z3.range}} of LTHR</li>
+          <li><strong>Z4 Lactate Threshold</strong> — {{canonical.zones.z4.range}} of LTHR</li>
+          <li><strong>Z5 VO2 / Anaerobic</strong> — {{canonical.zones.z5.range}} of LTHR</li>
+        </ul>
+      </div>
+      <p class="meta">Narrative explanation of <em>why</em> each zone matters — Angela's coaching notes — will go below this once she sends them.</p>
+    </section>
+
+    <section class="card">
+      <h2>Block Types <span class="pill">placeholder · canonical</span></h2>
+      <p>Foundational block-type vocabulary. The full ECHO Manual layers in advanced variants — these intro blocks are the starting point.</p>
+      <div class="canonical-callout">
+        <strong>Canonical reference (live from ECHO):</strong>
+        <ul style="margin: 8px 0 0; padding-left: 18px;">
+          <li><strong>{{canonical.block_types.base.name}}</strong> — {{canonical.block_types.base.intent}}</li>
+          <li><strong>{{canonical.block_types.build.name}}</strong> — {{canonical.block_types.build.intent}}</li>
+          <li><strong>{{canonical.block_types.peak.name}}</strong> — {{canonical.block_types.peak.intent}}</li>
+          <li><strong>{{canonical.block_types.taper.name}}</strong> — {{canonical.block_types.taper.intent}}</li>
+          <li><strong>{{canonical.block_types.recovery.name}}</strong> — {{canonical.block_types.recovery.intent}}</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Angela's Notes <span class="pill">placeholder</span></h2>
+      <p>Foundational coaching notes — Angela's own words on how she introduces athletes to training, sets expectations, and reads early signal. Content arriving in batches.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    © EchoDevo Coaching · Foundations Manual · Internal use only
+  </footer>
+
+  <!-- Chat widget mounts itself from /chat/chat.js if /api/health returns ok -->
+  <script src="/chat/chat.js" defer></script>
+
+  <script>
+    // Show authenticated coach email if available (set by middleware response header,
+    // surfaced by the server-rendered tag — for now we just hide it.)
+    // Future: read from a /api/whoami endpoint.
+  </script>
+</body>
+</html>
