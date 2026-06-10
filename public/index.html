@@ -214,19 +214,125 @@
     </section>
 
     <section class="card" id="sec-zones">
-      <h2>Zones <span class="pill">placeholder · canonical</span></h2>
-      <p>Heart-rate zones are the foundational anchor for everything we do. The values below are pulled directly from the ECHO Manual and will always match — if a zone changes in ECHO, Foundations updates automatically.</p>
+      <h2>Zones</h2>
+
+      <p>Zones are the language of training. They turn a vague instruction like <em>"go easy"</em> or <em>"push it"</em> into something specific, measurable, and repeatable. Every workout in your plan will be prescribed in zones — so the goal of this section is simple: by the end of it, you should know what each zone means, how to find it, and how to know you're in it.</p>
+
+      <p>ECHO uses one shared 5-band system across every modality: <strong>ZR · Z1 · Z2 · Z3 · VO2 Max</strong>. The bands stay the same whether you're talking about heart rate, bike power, run pace, or swim pace — what changes is the anchor each modality is built from. This shared vocabulary is intentional: when your coach says <em>"Z2 ride"</em> or <em>"Z3 run repeats,"</em> you should be able to hold those two ideas in the same shape in your head.</p>
+
+      <h3>The four ways to measure effort</h3>
+      <ul>
+        <li><strong>Heart rate (HR)</strong> — internal cost. Universal. Slightly delayed and influenced by heat, sleep, hydration, and stress.</li>
+        <li><strong>Power (bike)</strong> — external output, instantaneous, no lag. The cleanest bike anchor when available.</li>
+        <li><strong>Pace (run, swim)</strong> — external output expressed as time-per-distance. The cleanest run and swim anchor.</li>
+        <li><strong>RPE (Rate of Perceived Exertion)</strong> — subjective effort. Not a primary zone system in ECHO — it's the verification and safety-valve. If the output target says 250W but RPE says 10/10 on a Z2 day, the day is wrong, not the math.</li>
+      </ul>
+
+      <p>You don't need all four to train well. The rule we work from is <strong>Anchor → Range → Verify</strong>: test the output anchor (CP for bike, CS for run and swim), build the zone ranges from that anchor, and verify internal cost with HR, breathing, and RPE. Then apply context — heat, terrain, fatigue, fueling — on top.</p>
+
+      <h3>The bands (what they're for)</h3>
+      <ul>
+        <li><strong>ZR — Recovery.</strong> Active regeneration, reset work, low-cost movement. Unlimited duration. If you finish a ZR session feeling worked, it wasn't ZR.</li>
+        <li><strong>Z1 — Durability Base.</strong> Primary low-cost volume; chassis-building. Easy steady efforts in the 2-6+ hour range on the bike. This is where the aerobic engine and the durability foundation are built. The majority of your training year lives in ZR-Z1.</li>
+        <li><strong>Z2 — Steady / Durable.</strong> Race-pace feel for long-course racing. Sustained aerobic work, race-adjacent control, 1-3 hours on the bike. Sub-threshold but real work — talking shrinks to short phrases.</li>
+        <li><strong>Z3 — Threshold / Critical.</strong> Hard sustained efforts at or near threshold. 20-90 minutes total of work, usually delivered as intervals. This is where you train sustainable expression directly — the ceiling of "sustainable hard."</li>
+        <li><strong>VO2 Max — Peak / Ceiling.</strong> Short maximal-aerobic intervals, typically 3-8 minutes. Builds the ceiling, not the floor. High cost, low repeatability, and only useful when the structure underneath it exists.</li>
+      </ul>
+
+      <h3>HR Zones — % of LTHR</h3>
+      <p><strong>LTHR</strong> is your Lactate Threshold Heart Rate: the heart rate you can hold for roughly one hour of all-out effort. It's not your max HR. Once we know your LTHR, every HR zone is a percentage of that number. (How we test for LTHR lives in Section 3.)</p>
+
       <div class="canonical-callout">
         <strong>Canonical reference (live from ECHO):</strong> these values are auto-synced. Do not edit by hand.
         <ul style="margin: 8px 0 0; padding-left: 18px;">
-          <li><strong>Z1 Recovery / Easy</strong> — <81% of LTHR</li>
-          <li><strong>Z2 Aerobic Endurance</strong> — 81-89% of LTHR</li>
-          <li><strong>Z3 Tempo</strong> — 90-93% of LTHR</li>
-          <li><strong>Z4 Lactate Threshold</strong> — 94-99% of LTHR</li>
-          <li><strong>Z5 VO2 / Anaerobic</strong> — 100%+ of LTHR</li>
+          <li><strong>ZR — Recovery</strong> — ≤ 76% of LTHR</li>
+          <li><strong>Z1 — Durability Base</strong> — 76-86% of LTHR</li>
+          <li><strong>Z2 — Steady / Durable</strong> — 86-93% of LTHR</li>
+          <li><strong>Z3 — Threshold / Critical</strong> — 93-100% of LTHR</li>
+          <li><strong>VO2 Max</strong> — HR is a <em>lagging confirmation</em> only. HR cannot reliably govern VO2 work because it ramps too slowly to catch short intervals. Use power or pace, with RPE as the cross-check.</li>
         </ul>
       </div>
-      <p class="meta">Narrative explanation of <em>why</em> each zone matters will go below this once additional notes are added.</p>
+
+      <h3>Bike Power Zones — % of CP</h3>
+      <p><strong>CP (Critical Power)</strong> is the highest power you can sustain in a quasi-steady state — the horizontal asymptote of your power-duration curve. CP is the bike anchor for every zone, every interval target, and every pacing decision. Section 3 covers the 3 / 6 / 12-minute test we use to find it.</p>
+
+      <div class="canonical-callout">
+        <strong>Canonical reference (live from ECHO):</strong>
+        <ul style="margin: 8px 0 0; padding-left: 18px;">
+          <li><strong>ZR — Recovery</strong> — &lt; 65% of CP · unlimited duration</li>
+          <li><strong>Z1 — Durability Base</strong> — 65-79% of CP · 2-6+ hour efforts</li>
+          <li><strong>Z2 — Steady / Durable</strong> — 79-89% of CP · 1-3 hours</li>
+          <li><strong>Z3 — Threshold / Critical</strong> — 89-100% of CP · 20-90 min</li>
+          <li><strong>VO2 Max</strong> — 100-120% of CP · 3-8 min intervals</li>
+        </ul>
+      </div>
+
+      <p>Power is instantaneous — it tells you what you're doing <em>right now</em>, with no lag. HR tells you what your body is <em>responding to</em>, which is delayed by 30-60 seconds. Use both. <strong>When power and HR disagree, treat it as information — not a problem to solve.</strong> Heat, dehydration, poor sleep, or accumulated fatigue all show up as HR running high (or sometimes low) for a given power output. The right move depends on which signal the day belongs to.</p>
+
+      <h3>Run Zones — % of CS</h3>
+      <p><strong>CS (Critical Speed)</strong> is the running analog of CP — the highest pace you can sustain in a quasi-steady state. CS is the run anchor, and pace is the cleanest field expression of sustainable run performance. Run zones are built from CS, and HR is used to <em>verify</em> the cost.</p>
+
+      <div class="canonical-callout">
+        <strong>Canonical reference (live from ECHO):</strong>
+        <ul style="margin: 8px 0 0; padding-left: 18px;">
+          <li><strong>ZR — Recovery</strong> — slower than 75% of CS pace · HR ≤ 76% LTHR · regeneration and reset</li>
+          <li><strong>Z1 — Durability Base</strong> — 75-85% of CS pace · HR ~76-86% LTHR · primary low-cost run volume</li>
+          <li><strong>Z2 — Steady / Durable</strong> — 85-95% of CS pace · HR 86-93% LTHR · steady, durability support, race-adjacent</li>
+          <li><strong>Z3 — Threshold / Critical</strong> — 95-105% of CS pace · HR 93-100% LTHR · threshold / critical-speed work</li>
+          <li><strong>VO2 Max</strong> — 105-120% of CS pace · HR lagging confirmation only · 3-8 min interval work</li>
+        </ul>
+      </div>
+
+      <p class="meta">Reminder: run pace is time-per-distance (e.g. 4:30/km), so <em>higher % of CS pace</em> = <em>slower pace</em>. Only VO2 Max is faster than CS itself.</p>
+
+      <p><strong>Run power.</strong> If you train with a run power meter, run power should <em>mirror</em> CS, not replace it. CS is the field-tested reality; watts help you execute that reality on hills and uneven terrain. <strong>When watts and CS disagree, trust the field-tested CS anchor first</strong> — then use watts as a secondary execution aid. On hot days, hills, or off-road, HR and RPE will be more honest than pace.</p>
+
+      <h3>Swim Zones — % of CS (swim)</h3>
+      <p>Swim <strong>CS</strong> is the pool analog of CP and run CS — the highest swim pace you can hold in a quasi-steady state. Testing protocols (multiple distances, e.g. 200 / 400 / 800 or 200 / 400 / 1500) live in Section 3.</p>
+
+      <p>Swim zones <strong>compress around CS</strong> more tightly than bike or run because of how sensitive swimming is to technique. The percentage bands look small — that's correct.</p>
+
+      <div class="canonical-callout">
+        <strong>Canonical reference (live from ECHO):</strong>
+        <ul style="margin: 8px 0 0; padding-left: 18px;">
+          <li><strong>ZR — Recovery</strong> — 90-95% of CS · unlimited duration · easy technique work</li>
+          <li><strong>Z1 — Durability Base</strong> — 95-97% of CS · 45-90 min · long aerobic swim volume</li>
+          <li><strong>Z2 — Steady / Durable</strong> — 97-99% of CS · 30-60 min · sustained aerobic, race-pace for long course</li>
+          <li><strong>Z3 — Threshold / Critical</strong> — 99-102% of CS · 20-40 min · threshold / critical-speed swim work</li>
+          <li><strong>Above CS — intervals only:</strong>
+            <ul>
+              <li><em>Repeatable:</em> CS + 5% — e.g. 6-8 × 200m</li>
+              <li><em>Short max:</em> CS + 10% — e.g. 4-8 × 25-100m</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <h3>Hold the Water</h3>
+      <p>Swim intensity is governed by technique before it is governed by effort. You can muscle through a hard bike or run set — you cannot muscle through swim intensity without losing the catch, the rhythm, and the energy economy that make swimming work.</p>
+
+      <p>The phrase we use is <strong>Hold the Water</strong>. Feel the pressure on your forearm and palm through the entire pull, on every stroke. If a set forces you to lose your hold, the prescribed intensity was too high for that day — slow down and keep the technique intact. Speed in the water comes from a longer, cleaner stroke, not a more violent one.</p>
+
+      <p>This is why swim zones compress around CS the way they do, and why above-CS work is delivered as discrete intervals rather than sustained efforts. Hold the water first, then add pressure.</p>
+
+      <h3>RPE — the verification and safety valve</h3>
+      <p>RPE is <em>not</em> a primary zone system in ECHO. It's the verification layer: a way to check whether the prescribed output is actually affordable for the athlete on the day.</p>
+
+      <p>The rule: <strong>RPE outranks the anchor when internal strain spikes.</strong> If the output target says 250W and the athlete reports RPE 10/10 on what should be a Z2 day, the day is wrong, not the math. Pull back the output, finish the session at an honest cost, and figure out the <em>why</em> afterward (heat? illness? sleep debt? fueling? life stress?).</p>
+
+      <p>That's the safety-valve job RPE does. Every athlete should be in the habit of rating sessions in plain language — "easy," "steady," "hard," "very hard," "maxed out" — and reporting it. The number itself matters less than the <em>trend</em> over time relative to the prescribed work.</p>
+
+      <h3>How they fit together — Anchor → Range → Verify</h3>
+      <ul>
+        <li><strong>1. Anchor</strong> — test the output anchor (CP for bike, CS for run and swim, LTHR for HR). Use the best anchor available; fallbacks only when a real test isn't possible.</li>
+        <li><strong>2. Range</strong> — build ZR / Z1 / Z2 / Z3 / VO2 Max from the anchor. Do not blur the edges to match athlete preference.</li>
+        <li><strong>3. Verify</strong> — check internal cost with HR drift, breathing, and RPE. If the verification doesn't match the anchor, that's information.</li>
+        <li><strong>4. Apply context</strong> — heat, terrain, fatigue, and fueling can override. Zones are anchors, not permission to ignore reality.</li>
+      </ul>
+
+      <p>The ECHO Coaching Manual layers in advanced decision logic on top of these zones — when to push, when to hold, when to back off, when to layer durability work, how to interpret signals across an entire training block. Foundations gives you the vocabulary; ECHO teaches you to coach with it.</p>
+
+      <p class="meta">Questions on any zone? Ask your EchoDevo coach, or use the chat widget at the bottom-right.</p>
     </section>
 
     <section class="card" id="sec-block-types">
