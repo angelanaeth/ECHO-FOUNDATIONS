@@ -10,7 +10,7 @@ export const onRequest = async ({ env }) => {
     has_openai_key:  !!env.OPENAI_API_KEY,
     has_vectorize:   !!env.VEC,
     has_audit_db:    !!env.DB,
-    has_github_token: !!env.GITHUB_TOKEN,
+    has_github_token: !!(env.MANUAL_EDIT_GH_TOKEN || env.GITHUB_TOKEN),
   };
   return new Response(JSON.stringify(body, null, 2), {
     headers: {
