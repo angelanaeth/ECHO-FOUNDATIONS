@@ -1,0 +1,94 @@
+{
+  "_meta": {
+    "description": "Single source of truth for values that BOTH the ECHO Coaching Manual AND the Foundations Manual reference. Foundations imports this file at build time via scripts/sync-canonical.mjs. Never duplicate these values in Foundations source — always reference them by key.",
+    "schema_version": 1,
+    "owners": [
+      "echo-manual"
+    ],
+    "last_updated": "2026-06-10"
+  },
+  "platform": {
+    "name": "EchoDevo",
+    "manual_brand": "ECHO Coaching Manual",
+    "foundations_brand": "EchoDevo Foundations Manual"
+  },
+  "zones": {
+    "_doc": "Heart-rate zones expressed as percentages of LTHR (lactate threshold heart rate). These are the foundational HR zones — Foundations references them via {{canonical.zones.zN.range}}. Power and pace zones are NOT in canonical because they are ECHO-internal.",
+    "scheme": "LTHR-based, 5 zones",
+    "anchor": "LTHR",
+    "z1": {
+      "name": "Recovery / Easy",
+      "range": "<81%",
+      "purpose": "Active recovery, warm-up, cool-down"
+    },
+    "z2": {
+      "name": "Aerobic Endurance",
+      "range": "81-89%",
+      "purpose": "Foundational aerobic base building"
+    },
+    "z3": {
+      "name": "Tempo",
+      "range": "90-93%",
+      "purpose": "Sustained moderate effort, sub-threshold"
+    },
+    "z4": {
+      "name": "Lactate Threshold",
+      "range": "94-99%",
+      "purpose": "Threshold work, sustainable hard effort"
+    },
+    "z5": {
+      "name": "VO2 / Anaerobic",
+      "range": "100%+",
+      "purpose": "Maximal aerobic, high-intensity intervals"
+    }
+  },
+  "block_types": {
+    "_doc": "Foundational block-type vocabulary. The full ECHO Manual adds more advanced block variants — Foundations only references these intro-level ones.",
+    "base": {
+      "name": "Base",
+      "intent": "Build aerobic capacity and durability. Mostly Z1-Z2 volume.",
+      "typical_duration_weeks": "3-6"
+    },
+    "build": {
+      "name": "Build",
+      "intent": "Introduce threshold and tempo work on top of aerobic base. Z3-Z4 emphasis.",
+      "typical_duration_weeks": "3-4"
+    },
+    "peak": {
+      "name": "Peak",
+      "intent": "Race-specific intensity and durability. Mix of Z3-Z5 with race-pace work.",
+      "typical_duration_weeks": "2-3"
+    },
+    "taper": {
+      "name": "Taper",
+      "intent": "Reduce volume while preserving sharpness ahead of A-race.",
+      "typical_duration_weeks": "1-2"
+    },
+    "recovery": {
+      "name": "Recovery",
+      "intent": "Active recovery week, ~50-65% normal volume, Z1-Z2 only.",
+      "typical_duration_weeks": "1"
+    }
+  },
+  "testing": {
+    "_doc": "Foundational testing terminology. ECHO Manual contains the formula-level detail — Foundations only references the names/concepts.",
+    "lthr": {
+      "name": "LTHR (Lactate Threshold Heart Rate)",
+      "summary": "The HR you can sustain for ~1 hour of all-out effort. Anchor for HR zones."
+    },
+    "rpe": {
+      "name": "RPE (Rate of Perceived Exertion)",
+      "summary": "10-point subjective effort scale, used alongside HR/power/pace for athlete feedback."
+    }
+  },
+  "terminology": {
+    "_doc": "Words/phrases that must be used CONSISTENTLY between ECHO and Foundations. If you change one of these in ECHO, the drift-check will flag Foundations.",
+    "athlete": "athlete",
+    "coach": "coach",
+    "session": "session",
+    "workout": "workout",
+    "block": "block",
+    "phase": "phase",
+    "week": "week"
+  }
+}

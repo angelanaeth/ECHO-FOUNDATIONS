@@ -11,7 +11,7 @@ index_name = "echo-foundations-corpus"
 [[d1_databases]]
 binding = "DB"
 database_name = "echo-foundations"
-database_id = "00000000-0000-0000-0000-000000000000"  # ← replaced at first deploy
+database_id = "f4c05f6f-a6c7-45a0-9ee8-327b7a275a76"
 
 # Secrets (set via wrangler pages secret put ...):
 #   OPENAI_API_KEY         — for the chatbot

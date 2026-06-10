@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Foundations Editor · EchoDevo</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="robots" content="noindex, nofollow">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- TinyMCE WYSIWYG -->
+  <script src="https://cdn.jsdelivr.net/npm/tinymce@7.4.1/tinymce.min.js" referrerpolicy="origin"></script>
+
+  <style>
+    :root {
+      --bg: #f8f3e9;
+      --paper: #fffaf0;
+      --ink: #1a1a1a;
+      --muted: #6a5a3a;
+      --accent: #d65416;
+      --accent-2: #b08a3c;
+      --line: #e6dac3;
+      --header-bg: #0a1628;
+      --header-fg: #f5f3ec;
+      --ok: #4ade80;
+      --err: #b32d2d;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    header.app-bar {
+      background: var(--header-bg);
+      color: var(--header-fg);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 1px solid rgba(245,243,236,0.08);
+    }
+    header.app-bar .mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--accent); color: #fff; font-weight: 800; font-size: 17px;
+    }
+    header.app-bar h1 { font-size: 16px; margin: 0; font-weight: 700; }
+    header.app-bar .sub { font-size: 11.5px; color: var(--accent); letter-spacing: 0.04em; text-transform: uppercase; }
+    header.app-bar .spacer { flex: 1; }
+    header.app-bar .back {
+      color: rgba(245,243,236,0.78);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 6px 12px;
+      border: 1px solid rgba(245,243,236,0.18);
+      border-radius: 999px;
+    }
+    header.app-bar .back:hover { border-color: var(--accent); color: #fff; }
+    header.app-bar .user { font-size: 12px; color: rgba(245,243,236,0.62); }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 0;
+      min-height: calc(100vh - 64px);
+    }
+    aside.sidebar {
+      background: var(--paper);
+      border-right: 1px solid var(--line);
+      padding: 16px;
+      overflow-y: auto;
+    }
+    aside.sidebar h3 {
+      font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+      margin: 4px 0 10px; color: var(--muted);
+    }
+    aside.sidebar .sec-btn {
+      display: block; width: 100%;
+      text-align: left;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      font: inherit;
+      color: var(--ink);
+      transition: border-color 0.12s ease;
+    }
+    aside.sidebar .sec-btn:hover { border-color: var(--accent-2); }
+    aside.sidebar .sec-btn.active {
+      border-color: var(--accent); background: rgba(214,84,22,0.06);
+      font-weight: 600;
+    }
+    aside.sidebar .sec-btn .id-tag {
+      display: inline-block; font-size: 10px; font-family: ui-monospace, monospace;
+      color: var(--muted); margin-right: 6px;
+    }
+
+    main.workspace {
+      padding: 24px;
+      overflow-y: auto;
+    }
+    .toolbar {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+    .toolbar .title { font-weight: 700; font-size: 18px; flex: 1; }
+    .toolbar .title small { font-weight: 400; color: var(--muted); font-size: 13px; }
+
+    button.btn {
+      padding: 9px 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.12s ease;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    button.btn:hover { border-color: var(--accent-2); }
+    button.btn:disabled { opacity: 0.5; cursor: wait; }
+    button.btn.primary {
+      background: var(--accent); color: #fff; border-color: var(--accent);
+    }
+    button.btn.primary:hover { background: #b8431a; }
+    button.btn.echo {
+      background: #0a1628; color: #fff; border-color: #0a1628;
+    }
+    button.btn.echo:hover { background: #15233f; }
+    button.btn.ghost {
+      background: transparent;
+      border: 1px dashed var(--accent-2);
+      color: var(--muted);
+    }
+
+    #editor-wrap {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .status {
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin: 12px 0;
+      font-size: 14px;
+      display: none;
+    }
+    .status.ok  { background: rgba(74,222,128,0.12); color: #1a6e3a; border: 1px solid rgba(74,222,128,0.4); display: block; }
+    .status.err { background: rgba(179,45,45,0.10); color: var(--err); border: 1px solid rgba(179,45,45,0.3); display: block; }
+    .status.info { background: rgba(214,84,22,0.08); color: var(--accent); border: 1px solid rgba(214,84,22,0.25); display: block; }
+
+    /* Modal for "Pull from ECHO" */
+    .modal-bg {
+      position: fixed; inset: 0; background: rgba(10,22,40,0.6);
+      display: none; align-items: center; justify-content: center;
+      z-index: 9000;
+    }
+    .modal-bg.open { display: flex; }
+    .modal {
+      background: #fff; border-radius: 14px;
+      width: min(680px, calc(100vw - 32px));
+      max-height: calc(100vh - 64px);
+      display: flex; flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+    }
+    .modal-head {
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--line);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .modal-head h2 { margin: 0; font-size: 17px; font-weight: 700; }
+    .modal-head .x {
+      background: none; border: none; font-size: 22px; cursor: pointer; color: var(--muted);
+      line-height: 1;
+    }
+    .modal-body { padding: 20px 22px; overflow-y: auto; }
+    .modal-body p { color: var(--muted); margin: 0 0 14px; font-size: 14px; }
+    .modal-body label { display: block; margin: 12px 0 6px; font-weight: 600; font-size: 13px; }
+    .modal-body select, .modal-body input[type=text] {
+      width: 100%; padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font: inherit; background: #fff;
+    }
+    .modal-body .modes {
+      display: flex; gap: 12px; margin-top: 8px;
+    }
+    .modal-body .mode-card {
+      flex: 1; padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.12s ease;
+    }
+    .modal-body .mode-card.selected {
+      border-color: var(--accent); background: rgba(214,84,22,0.05);
+    }
+    .modal-body .mode-card strong { display: block; margin-bottom: 4px; font-size: 14px; }
+    .modal-body .mode-card span { font-size: 12.5px; color: var(--muted); }
+    .modal-foot {
+      padding: 14px 22px; border-top: 1px solid var(--line);
+      display: flex; gap: 10px; justify-content: flex-end;
+    }
+    .preview-box {
+      background: var(--bg); border: 1px solid var(--line); border-radius: 8px;
+      padding: 12px; margin-top: 12px;
+      max-height: 200px; overflow: auto;
+      font-size: 13px; color: var(--ink);
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <header class="app-bar">
+    <span class="mark">F</span>
+    <div>
+      <h1>Foundations Editor</h1>
+      <div class="sub">EchoDevo · WYSIWYG</div>
+    </div>
+    <span class="spacer"></span>
+    <span class="user" id="user"></span>
+    <a class="back" href="/">← View site</a>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <h3>Foundations sections</h3>
+      <div id="section-list">
+        <p style="color:var(--muted);font-size:13px">Loading…</p>
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <div class="toolbar">
+        <div class="title" id="current-title">Select a section to edit →</div>
+        <button class="btn echo" id="pull-from-echo-btn" disabled>🔄 Pull Latest from ECHO</button>
+        <button class="btn primary" id="save-btn" disabled>💾 Save & Commit</button>
+      </div>
+
+      <div class="status" id="status"></div>
+      <div id="editor-wrap">
+        <textarea id="editor"></textarea>
+      </div>
+    </main>
+  </div>
+
+  <!-- Pull-from-ECHO modal -->
+  <div class="modal-bg" id="pull-modal">
+    <div class="modal">
+      <div class="modal-head">
+        <h2>🔄 Pull a section from ECHO</h2>
+        <span class="spacer" style="flex:1"></span>
+        <button class="x" id="pull-close" aria-label="Close">×</button>
+      </div>
+      <div class="modal-body">
+        <p>Choose a section from the <strong>ECHO Coaching Manual</strong> to copy into the currently-selected Foundations section. ECHO-specific markup (admin-reveal slots, internal anchors, etc.) is stripped automatically. The copy is committed to <code>main</code> and a banner is added so you know it came from ECHO.</p>
+
+        <label for="echo-section-select">ECHO source section</label>
+        <select id="echo-section-select">
+          <option value="">Loading…</option>
+        </select>
+
+        <label>Destination (Foundations)</label>
+        <input type="text" id="dest-display" readonly>
+
+        <label>Merge mode</label>
+        <div class="modes">
+          <div class="mode-card selected" data-mode="overwrite">
+            <strong>Overwrite</strong>
+            <span>Replace the Foundations section entirely with the ECHO version.</span>
+          </div>
+          <div class="mode-card" data-mode="append">
+            <strong>Append</strong>
+            <span>Add the ECHO content after the existing Foundations content.</span>
+          </div>
+        </div>
+
+        <div class="preview-box" id="echo-preview" style="display:none"></div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn" id="pull-cancel">Cancel</button>
+        <button class="btn echo" id="pull-confirm" disabled>Pull into Foundations</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ─── State ───────────────────────────────────────
+    let currentSectionId = null;
+    let currentSectionSha = null;
+    let editorReady = false;
+    let foundationsSections = [];
+    let echoSections = [];
+    let pullMode = "overwrite";
+
+    // ─── Initial bootstrap ──────────────────────────
+    (async function init() {
+      // Show authenticated user
+      try {
+        const r = await fetch("/api/health");
+        document.getElementById("user").textContent = r.headers.get("x-authenticated-user") || "";
+      } catch {}
+
+      // Init TinyMCE
+      tinymce.init({
+        selector: "#editor",
+        height: 600,
+        menubar: false,
+        plugins: "lists link code table image autoresize",
+        toolbar: "undo redo | bold italic underline | h2 h3 | bullist numlist | link | code",
+        branding: false,
+        promotion: false,
+        statusbar: false,
+        autoresize_min_height: 500,
+        autoresize_max_height: 800,
+        setup: (ed) => {
+          ed.on("init", () => { editorReady = true; });
+          ed.on("change input", () => {
+            document.getElementById("save-btn").disabled = !currentSectionId;
+          });
+        },
+      });
+
+      await loadFoundationsSections();
+      bindModalEvents();
+    })();
+
+    // ─── Foundations sections ───────────────────────
+    async function loadFoundationsSections() {
+      const list = document.getElementById("section-list");
+      list.innerHTML = '<p style="color:var(--muted);font-size:13px">Loading…</p>';
+      try {
+        const r = await fetch("/api/admin/sections");
+        const data = await r.json();
+        foundationsSections = data.sections || [];
+        if (foundationsSections.length === 0) {
+          list.innerHTML = '<p style="color:var(--muted);font-size:13px">No sections found.</p>';
+          return;
+        }
+        list.innerHTML = "";
+        for (const s of foundationsSections) {
+          const btn = document.createElement("button");
+          btn.className = "sec-btn";
+          btn.dataset.id = s.id;
+          btn.innerHTML = `<span class="id-tag">${s.id}</span><strong>${escapeHtml(s.title)}</strong>`;
+          btn.addEventListener("click", () => loadSection(s.id));
+          list.appendChild(btn);
+        }
+      } catch (e) {
+        list.innerHTML = `<p style="color:var(--err);font-size:13px">Failed: ${escapeHtml(e.message)}</p>`;
+      }
+    }
+
+    async function loadSection(id) {
+      setStatus("info", `Loading ${id}…`);
+      // Mark active
+      document.querySelectorAll(".sec-btn").forEach(b => b.classList.toggle("active", b.dataset.id === id));
+      try {
+        const r = await fetch("/api/admin/sections?id=" + encodeURIComponent(id));
+        const data = await r.json();
+        if (!r.ok || data.error) throw new Error(data.error || ("HTTP " + r.status));
+        currentSectionId = id;
+        currentSectionSha = data.sha;
+        document.getElementById("current-title").innerHTML = `${escapeHtml(data.title)} <small>· ${id}</small>`;
+        tinymce.activeEditor.setContent(data.html || "");
+        document.getElementById("dest-display").value = `${id} — ${data.title}`;
+        document.getElementById("save-btn").disabled = false;
+        document.getElementById("pull-from-echo-btn").disabled = false;
+        setStatus("ok", `Loaded ${id}. Edit and click Save to commit.`);
+      } catch (e) {
+        setStatus("err", `Load failed: ${e.message}`);
+      }
+    }
+
+    // ─── Save ───────────────────────────────────────
+    document.getElementById("save-btn").addEventListener("click", async () => {
+      if (!currentSectionId) return;
+      const btn = document.getElementById("save-btn");
+      btn.disabled = true;
+      setStatus("info", `Saving ${currentSectionId} to ECHO-FOUNDATIONS…`);
+      try {
+        const html = tinymce.activeEditor.getContent();
+        const r = await fetch("/api/admin/sections?id=" + encodeURIComponent(currentSectionId), {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ html, commit_message: `edit(${currentSectionId}): update via admin editor` }),
+        });
+        const data = await r.json();
+        if (!r.ok || data.error) throw new Error(data.error || ("HTTP " + r.status));
+        setStatus("ok", `✅ Saved! Commit ${data.commit_sha.slice(0,7)} — site rebuilds in ~60s.`);
+      } catch (e) {
+        setStatus("err", `Save failed: ${e.message}`);
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    // ─── Pull from ECHO modal ──────────────────────
+    function bindModalEvents() {
+      const modal = document.getElementById("pull-modal");
+      document.getElementById("pull-from-echo-btn").addEventListener("click", openPullModal);
+      document.getElementById("pull-close").addEventListener("click", closePullModal);
+      document.getElementById("pull-cancel").addEventListener("click", closePullModal);
+      document.getElementById("echo-section-select").addEventListener("change", onEchoSelectionChange);
+      document.querySelectorAll(".mode-card").forEach(card => {
+        card.addEventListener("click", () => {
+          document.querySelectorAll(".mode-card").forEach(c => c.classList.remove("selected"));
+          card.classList.add("selected");
+          pullMode = card.dataset.mode;
+        });
+      });
+      document.getElementById("pull-confirm").addEventListener("click", confirmPull);
+    }
+
+    async function openPullModal() {
+      if (!currentSectionId) return;
+      document.getElementById("pull-modal").classList.add("open");
+      const sel = document.getElementById("echo-section-select");
+      sel.innerHTML = '<option value="">Loading ECHO sections…</option>';
+      try {
+        const r = await fetch("/api/admin/echo-sections");
+        const data = await r.json();
+        echoSections = data.sections || [];
+        sel.innerHTML = '<option value="">— choose an ECHO section —</option>';
+        for (const s of echoSections) {
+          const opt = document.createElement("option");
+          opt.value = s.id;
+          opt.textContent = `${s.id} — ${s.title}`;
+          sel.appendChild(opt);
+        }
+      } catch (e) {
+        sel.innerHTML = `<option>Failed to load: ${e.message}</option>`;
+      }
+    }
+
+    function closePullModal() {
+      document.getElementById("pull-modal").classList.remove("open");
+      document.getElementById("echo-preview").style.display = "none";
+      document.getElementById("pull-confirm").disabled = true;
+    }
+
+    async function onEchoSelectionChange(e) {
+      const id = e.target.value;
+      const preview = document.getElementById("echo-preview");
+      const confirmBtn = document.getElementById("pull-confirm");
+      if (!id) { preview.style.display = "none"; confirmBtn.disabled = true; return; }
+      preview.style.display = "block";
+      preview.textContent = "Loading preview…";
+      confirmBtn.disabled = true;
+      try {
+        const r = await fetch("/api/admin/echo-sections?id=" + encodeURIComponent(id));
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error || ("HTTP " + r.status));
+        preview.textContent = (data.html || "").slice(0, 2000);
+        confirmBtn.disabled = false;
+      } catch (e) {
+        preview.textContent = "Failed to load: " + e.message;
+      }
+    }
+
+    async function confirmPull() {
+      const echoId = document.getElementById("echo-section-select").value;
+      const fId    = currentSectionId;
+      if (!echoId || !fId) return;
+      const btn = document.getElementById("pull-confirm");
+      btn.disabled = true;
+      btn.textContent = "Pulling…";
+      setStatus("info", `Pulling ${echoId} → ${fId}…`);
+      try {
+        const r = await fetch("/api/admin/pull-from-echo", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ echo_id: echoId, foundations_id: fId, mode: pullMode }),
+        });
+        const data = await r.json();
+        if (!r.ok || data.error) throw new Error(data.error || ("HTTP " + r.status));
+        closePullModal();
+        setStatus("ok", `✅ Pulled ${echoId} → ${fId} (${pullMode}). Commit ${data.commit_sha.slice(0,7)}. Reloading section…`);
+        // Reload the section so the editor shows the new content
+        setTimeout(() => loadSection(fId), 800);
+      } catch (e) {
+        setStatus("err", "Pull failed: " + e.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Pull into Foundations";
+      }
+    }
+
+    // ─── Helpers ────────────────────────────────────
+    function setStatus(level, msg) {
+      const el = document.getElementById("status");
+      el.className = "status " + level;
+      el.textContent = msg;
+    }
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+    }
+  </script>
+</body>
+</html>
