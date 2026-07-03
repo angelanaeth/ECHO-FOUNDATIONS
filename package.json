@@ -8,6 +8,10 @@
     "sync-canonical": "node scripts/sync-canonical.mjs",
     "expand-canonical": "node scripts/expand-canonical.mjs",
     "drift-check": "node scripts/drift-check.mjs",
+    "build:chunks": "node scripts/chunk-manual.mjs",
+    "build:embeddings": "node scripts/build-embeddings.mjs",
+    "sync:vectorize": "node scripts/sync-vectorize.mjs",
+    "build:rag": "npm run build:chunks && npm run build:embeddings && npm run sync:vectorize",
     "build": "npm run sync-canonical || [ $? -eq 2 ] && npm run expand-canonical && npm run drift-check",
     "dev": "npx wrangler pages dev public --compatibility-date=2025-01-01",
     "deploy": "npx wrangler pages deploy public --project-name=echo-foundations"

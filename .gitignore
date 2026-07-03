@@ -11,3 +11,8 @@ dist/
 # the synced canonical file is committed so the diff history is visible
 # (do NOT add content/canonical.from-echo.json here)
 content/drafts/
+
+# RAG build artifacts — rebuilt from public/index.html in CI. Never committed.
+content/foundations-chunks.json
+content/foundations-embeddings.ndjson
+content/foundations-embeddings.meta.json

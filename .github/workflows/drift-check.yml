@@ -15,17 +15,72 @@ permissions:
   contents: write
   pull-requests: write
 
+concurrency:
+  group: drift-check-foundations-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 20
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+
+      # Staleness guard applies only to push-triggered runs. Scheduled
+      # + workflow_dispatch always run against latest main by design.
+      - name: Staleness guard (push runs only)
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          THIS_SHA="${{ github.sha }}"
+          MAIN_SHA=$(curl -sf \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/commits/main" \
+            | python3 -c 'import json,sys; print(json.load(sys.stdin)["sha"])')
+          echo "This workflow's commit: $THIS_SHA"
+          echo "Current main HEAD:      $MAIN_SHA"
+          if [[ "$THIS_SHA" == "$MAIN_SHA" ]]; then
+            echo "✓ This IS main HEAD"
+            exit 0
+          fi
+          git fetch --no-tags --depth=20 origin main || true
+          if git merge-base --is-ancestor "$THIS_SHA" "$MAIN_SHA" 2>/dev/null; then
+            echo "✗ Skipping: main has moved past $THIS_SHA to $MAIN_SHA — a newer run will cover this."
+            exit 1
+          fi
+          echo "⚠️  Diverged history; proceeding."
+
+      - name: Validate secrets are present
+        env:
+          ECHO_MANUAL_READ_TOKEN: ${{ secrets.ECHO_MANUAL_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${ECHO_MANUAL_READ_TOKEN:-}" ]; then
+            echo "✖ ECHO_MANUAL_READ_TOKEN is missing — drift check cannot read ECHO-MANUAL."
+            exit 1
+          fi
+          echo "✓ ECHO_MANUAL_READ_TOKEN present"
+          echo "→ Verifying token can read ECHO-MANUAL…"
+          status=$(curl -sS -o /tmp/repo.json -w "%{http_code}" \
+            -H "Authorization: Bearer $ECHO_MANUAL_READ_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/angelanaeth/ECHO-MANUAL)
+          if [ "$status" != "200" ]; then
+            echo "✖ Token check failed (HTTP $status):"
+            cat /tmp/repo.json
+            exit 1
+          fi
+          echo "✓ Token can read ECHO-MANUAL"
 
       - name: Install
         run: npm install --no-audit --no-fund
