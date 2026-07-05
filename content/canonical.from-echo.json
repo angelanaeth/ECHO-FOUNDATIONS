@@ -1,11 +1,14 @@
 {
   "_meta": {
     "description": "Single source of truth for values that BOTH the ECHO Coaching Manual AND the Foundations Manual reference. Foundations imports this file at build time via scripts/sync-canonical.mjs. Never duplicate these values in Foundations source — always reference them by key.",
-    "schema_version": 1,
+    "schema_version": 2,
     "owners": [
       "echo-manual"
     ],
-    "last_updated": "2026-06-10"
+    "last_updated": "2026-06-10",
+    "changelog": [
+      "v1 → v2: Aligned zone system with published ECHO Coaching Manual. Was 5-zone Z1-Z5 LTHR scheme; now matches ECHO's ZR/Z1/Z2/Z3/VO2 Max system across HR, power, pace, and swim. Added swim zones, CP/CS testing entries, hold-the-water philosophy. RPE description corrected from band-table to verification/safety-valve framing per ECHO."
+    ]
   },
   "platform": {
     "name": "EchoDevo",
@@ -13,50 +16,167 @@
     "foundations_brand": "EchoDevo Foundations Manual"
   },
   "zones": {
-    "_doc": "Heart-rate zones expressed as percentages of LTHR (lactate threshold heart rate). These are the foundational HR zones — Foundations references them via {{canonical.zones.zN.range}}. Power and pace zones are NOT in canonical because they are ECHO-internal.",
-    "scheme": "LTHR-based, 5 zones",
-    "anchor": "LTHR",
-    "z1": {
-      "name": "Recovery / Easy",
-      "range": "<81%",
-      "purpose": "Active recovery, warm-up, cool-down"
+    "_doc": "ECHO uses a 5-band zone system: ZR (Recovery), Z1 (Durability Base), Z2 (Steady / Durable), Z3 (Threshold / Critical), and VO2 Max (Peak / Ceiling). Each modality (HR, bike power, run pace, swim pace) has its own anchor and percentage bands but uses the SAME zone names. This shared vocabulary is the heart of the ECHO language. Foundations references each band via {{canonical.zones.<modality>.<band>.<field>}}.",
+    "scheme": "ZR / Z1 / Z2 / Z3 / VO2 Max — 5 bands shared across HR, power, and pace",
+    "philosophy": "Start with the output anchor (CP for bike, CS for run/swim). Build the zone ranges from that anchor. Verify internal cost with HR and RPE. Do not blur the edges to match athlete preference.",
+    "hr": {
+      "_doc": "Heart-rate ranges as % of LTHR. HR is the universal internal-cost verifier; in heat, hills, or fatigue it can outrank the external anchor for that day. NOTE: ZR and Z1 are deliberately non-adjacent — the 76–80% LTHR window is a \"neither\" zone (not true recovery, not durability-building base). All other HR bands and all bike-power / run-pace / swim-pace bands remain abutting.",
+      "anchor": "LTHR (Lactate Threshold Heart Rate)",
+      "zr": {
+        "name": "ZR — Recovery",
+        "range": "65–76%",
+        "purpose": "Regeneration, reset work, low-cost movement"
+      },
+      "z1": {
+        "name": "Z1 — Durability Base",
+        "range": "80–86%",
+        "purpose": "Primary low-cost volume; chassis-building"
+      },
+      "z2": {
+        "name": "Z2 — Steady / Durable",
+        "range": "86-93%",
+        "purpose": "Steady work, durability support, race-adjacent control"
+      },
+      "z3": {
+        "name": "Z3 — Threshold / Critical",
+        "range": "93-100%",
+        "purpose": "Threshold / critical-intensity work — sustainable expression trained directly"
+      },
+      "vo2": {
+        "name": "VO2 Max — Peak / Ceiling",
+        "range": "lagging confirmation only",
+        "purpose": "HR lags above CP/CS; use power/pace and RPE, not HR, to govern VO2 work"
+      },
+      "_gap_note": {
+        "range_lthr_pct": "76–80%",
+        "meaning": "Deliberate dead-zone between ZR and Z1. If recovery HR drifts here, pull back to true ZR. If Z1 HR sits here instead of climbing into 80–86%, the session is under-stimulating durability OR HR is suppressed by fatigue/under-fueling/environment — investigate."
+      }
     },
-    "z2": {
-      "name": "Aerobic Endurance",
-      "range": "81-89%",
-      "purpose": "Foundational aerobic base building"
+    "bike_power": {
+      "_doc": "Bike power ranges as % of CP (Critical Power). Power is the cleanest external anchor on the bike; HR verifies internal cost.",
+      "anchor": "CP (Critical Power, bike)",
+      "zr": {
+        "name": "ZR — Recovery",
+        "range": "< 65% CP",
+        "duration": "unlimited",
+        "purpose": "Active regeneration"
+      },
+      "z1": {
+        "name": "Z1 — Durability Base",
+        "range": "65-79% CP",
+        "duration": "2-6+ hours",
+        "purpose": "Easy low-cost, long steady efforts"
+      },
+      "z2": {
+        "name": "Z2 — Steady / Durable",
+        "range": "79-89% CP",
+        "duration": "1-3 hours",
+        "purpose": "Race-pace feel, sustained aerobic work"
+      },
+      "z3": {
+        "name": "Z3 — Threshold / Critical",
+        "range": "89-100% CP",
+        "duration": "20-90 min",
+        "purpose": "Hard sustained efforts at/near threshold"
+      },
+      "vo2": {
+        "name": "VO2 Max — Peak Power",
+        "range": "100-120% CP",
+        "duration": "3-8 min intervals",
+        "purpose": "Maximal-aerobic ceiling work"
+      }
     },
-    "z3": {
-      "name": "Tempo",
-      "range": "90-93%",
-      "purpose": "Sustained moderate effort, sub-threshold"
+    "run_pace": {
+      "_doc": "Run pace ranges as % of CS (Critical Speed). Pace is the cleanest field expression of sustainable run performance; run power should mirror CS, not replace it.",
+      "anchor": "CS (Critical Speed, run)",
+      "zr": {
+        "name": "ZR — Recovery",
+        "range": "< 75% CS",
+        "duration": "unlimited",
+        "purpose": "Regeneration, reset, low-cost movement"
+      },
+      "z1": {
+        "name": "Z1 — Durability Base",
+        "range": "75-85% CS",
+        "duration": "long aerobic",
+        "purpose": "Primary low-cost volume; chassis-building"
+      },
+      "z2": {
+        "name": "Z2 — Steady / Durable",
+        "range": "85-95% CS",
+        "duration": "race-adjacent",
+        "purpose": "Steady work, durability support"
+      },
+      "z3": {
+        "name": "Z3 — Threshold / Critical",
+        "range": "95-105% CS",
+        "duration": "20-90 min",
+        "purpose": "Threshold / critical-speed work"
+      },
+      "vo2": {
+        "name": "VO2 Max — Peak",
+        "range": "105-120% CS",
+        "duration": "3-8 min intervals",
+        "purpose": "Ceiling development"
+      }
     },
-    "z4": {
-      "name": "Lactate Threshold",
-      "range": "94-99%",
-      "purpose": "Threshold work, sustainable hard effort"
-    },
-    "z5": {
-      "name": "VO2 / Anaerobic",
-      "range": "100%+",
-      "purpose": "Maximal aerobic, high-intensity intervals"
+    "swim_pace": {
+      "_doc": "Swim pace ranges as % of swim CS (Critical Swim Speed). Swim zones compress around CS more tightly than bike or run because of technique sensitivity.",
+      "anchor": "CS (Critical Swim Speed)",
+      "zr": {
+        "name": "ZR — Recovery",
+        "range": "90-95% CS",
+        "duration": "unlimited",
+        "purpose": "Easy technique work, reset"
+      },
+      "z1": {
+        "name": "Z1 — Durability Base",
+        "range": "95-97% CS",
+        "duration": "45-90 min",
+        "purpose": "Long aerobic swim volume"
+      },
+      "z2": {
+        "name": "Z2 — Steady / Durable",
+        "range": "97-99% CS",
+        "duration": "30-60 min",
+        "purpose": "Sustained aerobic, race-pace for long course"
+      },
+      "z3": {
+        "name": "Z3 — Threshold / Critical",
+        "range": "99-102% CS",
+        "duration": "20-40 min",
+        "purpose": "Threshold / critical-speed swim work"
+      },
+      "intervals": {
+        "_doc": "Above-CS swim work is done as discrete intervals, not as a sustained 'VO2' band.",
+        "repeatable": {
+          "range": "CS + 5%",
+          "format": "6-8 × 200m",
+          "purpose": "Repeatable interval work above CS"
+        },
+        "short_max": {
+          "range": "CS + 10%",
+          "format": "4-8 × 25-100m",
+          "purpose": "Short maximal efforts"
+        }
+      }
     }
   },
   "block_types": {
     "_doc": "Foundational block-type vocabulary. The full ECHO Manual adds more advanced block variants — Foundations only references these intro-level ones.",
     "base": {
       "name": "Base",
-      "intent": "Build aerobic capacity and durability. Mostly Z1-Z2 volume.",
+      "intent": "Build aerobic capacity and durability. Mostly ZR-Z1 volume with steady Z2 introduction.",
       "typical_duration_weeks": "3-6"
     },
     "build": {
       "name": "Build",
-      "intent": "Introduce threshold and tempo work on top of aerobic base. Z3-Z4 emphasis.",
+      "intent": "Introduce threshold and tempo work on top of aerobic base. Z2-Z3 emphasis.",
       "typical_duration_weeks": "3-4"
     },
     "peak": {
       "name": "Peak",
-      "intent": "Race-specific intensity and durability. Mix of Z3-Z5 with race-pace work.",
+      "intent": "Race-specific intensity and durability. Mix of Z2-Z3 with race-pace work and selected VO2 Max touches.",
       "typical_duration_weeks": "2-3"
     },
     "taper": {
@@ -66,19 +186,53 @@
     },
     "recovery": {
       "name": "Recovery",
-      "intent": "Active recovery week, ~50-65% normal volume, Z1-Z2 only.",
+      "intent": "Active recovery week, ~50-65% normal volume, ZR-Z1 only.",
       "typical_duration_weeks": "1"
     }
   },
   "testing": {
-    "_doc": "Foundational testing terminology. ECHO Manual contains the formula-level detail — Foundations only references the names/concepts.",
+    "_doc": "Foundational testing terminology. ECHO Manual contains the formula-level detail — Foundations only references the names/concepts and high-level protocols.",
     "lthr": {
       "name": "LTHR (Lactate Threshold Heart Rate)",
-      "summary": "The HR you can sustain for ~1 hour of all-out effort. Anchor for HR zones."
+      "summary": "The HR ceiling at the top of Z1 — sustainable for ~1 hour of all-out effort. Anchor for HR zones.",
+      "field_test": "Preferred (ECHO gold standard): prescribe 40-60 min at Z1 power/pace; the observed HR defines the top of Z1. Fallback: 30-min all-out effort, avg HR of the final 20 min = LTHR. Race-derived: IM avg HR + 2 bpm."
+    },
+    "cp": {
+      "name": "CP (Critical Power, bike)",
+      "summary": "The horizontal asymptote of the power-duration curve — the highest power sustainable in a quasi-steady state. The bike anchor for all zones, intensity targets, and pacing.",
+      "field_test": "Three maximal efforts on the bike: 3-min, 6-min (or 8-min), and 12-min, with full recovery between each. CP and W′ derived from the slope-intercept of work-vs-time. Three points (not two) allow detection of a poorly paced trial."
+    },
+    "cs": {
+      "name": "CS (Critical Speed, run)",
+      "summary": "The running analog of CP — the asymptote of pace-vs-duration. Anchor for run pace zones.",
+      "field_test": "Multi-distance maximal efforts (commonly 3K and 10K, or similar) used to derive CS and D′ from the same model as CP."
+    },
+    "swim_cs": {
+      "name": "CS (Critical Swim Speed)",
+      "summary": "The pool analog of CP — highest sustainable swim pace in quasi-steady state. Anchor for swim zones.",
+      "field_test": "Gold standard: 100 / 300 / 600 m maximal time trials (push-off starts, no diving, separate days or full recovery between). Plot distance vs time; slope = CS (m/s), y-intercept = D′ swim. Acceptable alternatives: 200 / 400 / 800 m or 150 / 300 / 600 m."
     },
     "rpe": {
       "name": "RPE (Rate of Perceived Exertion)",
-      "summary": "10-point subjective effort scale, used alongside HR/power/pace for athlete feedback."
+      "summary": "Subjective effort, used as a verification and safety-valve — not as a primary zone system. If the output target says 250W but RPE says 10/10 on a Z2 day, the day is wrong, not the math. RPE outranks the anchor when internal strain spikes."
+    },
+    "retest_cadence": {
+      "summary": "Update CP, CS, and swim CS every 6-8 weeks, or when formal testing data is collected. Small, frequent adjustments are preferred over infrequent large corrections. Do NOT update an anchor after a single great workout, during heavy fatigue / high ATL, during illness or major life stress, or to reward fitness or make the athlete feel good. Anchors reflect current working fitness, not potential. Stale anchors cause every downstream zone, pacing target, and block decision to drift with them."
+    }
+  },
+  "philosophy": {
+    "_doc": "Phrases and framings that must be used consistently between ECHO and Foundations.",
+    "anchor_range_verify": {
+      "name": "Anchor → Range → Verify",
+      "summary": "Test the output anchor (CP/CS). Build the zone ranges from that anchor. Verify internal cost with HR, breathing, and RPE. Apply context (heat, terrain, fatigue, fueling) on top."
+    },
+    "trust_the_field_anchor": {
+      "name": "Trust the field-tested anchor first",
+      "summary": "When watts and CS disagree on the run, trust the field-tested CS anchor first; use watts as a secondary execution aid. When power and HR disagree on the bike, treat the disagreement as information — heat, dehydration, or fatigue — not as a problem to solve."
+    },
+    "hold_the_water": {
+      "name": "Hold the Water (swim)",
+      "summary": "Swim intensity is governed by technique before it is governed by effort. You can muscle through a hard bike or run set — you cannot muscle through swim intensity without losing the catch, the rhythm, and the energy economy that make swimming work. The phrase: hold the water. Feel the pressure on your forearm and palm through the entire pull, on every stroke. If a set forces you to lose your hold, the prescribed intensity was too high — slow down and keep the technique intact. Speed comes from a longer, cleaner stroke, not a more violent one."
     }
   },
   "terminology": {
